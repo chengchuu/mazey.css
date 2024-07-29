@@ -2,7 +2,7 @@
   "name": "mazey.css",
   "version": "1.0.0",
   "description": "Mazey Style",
-  "main": "src/z-temporary/index.js",
+  "main": "lib/index.css",
   "scripts": {
     "build:index": "cross-env ENTRY=index webpack --config webpack.config.js",
     "build:confluence": "cross-env ENTRY=confluence webpack --config webpack.config.js",

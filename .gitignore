@@ -11,7 +11,6 @@ temp/
 
 # Editor directories and files
 .idea
-# .vscode
 *.suo
 *.ntvs*
 *.njsproj
@@ -44,7 +43,6 @@ package-lock.json
 *.secret.sh
 
 # Other Files
-
 lib/*.txt
 lib/*.html
 lib/*.js
