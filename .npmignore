@@ -1,0 +1,64 @@
+# Folders
+build/
+node_modules/
+test/
+doc/
+docs/
+undefined/
+temp/
+examples/
+images/
+coverage/
+types/
+
+# Specific script subdirectories
+scripts/convert/
+scripts/shell/
+
+# Editors & IDEs settings
+.idea/
+.vscode/
+*.sublime*
+
+# Code Linters & Formatters
+.editorconfig
+.eslintignore
+.lintstagedrc
+.prettierignore
+.prettierrc
+.eslintrc.js
+.babelrc
+.eslintrc
+.npmrc
+
+# Configurations
+*.yml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Dependency Lock Files
+yarn.lock
+yarn-error.log
+package-lock.json
+
+# Configuration Files
+api-extractor.json
+commitlint.config.js
+rollup.config.js
+webpack.config.js
+webpack.config.dev.js
+jsdoc.config.json
+tsconfig.json
+
+# Documentation in other languages
+README_CN.md
+README_ZH.md
+
+# Global TypeScript definitions
+/global.d.ts
+
+# System files
+.DS_Store
+Thumbs.db

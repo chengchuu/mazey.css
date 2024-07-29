@@ -1,6 +1,6 @@
 {
   "name": "mazey.css",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Mazey Style",
   "main": "lib/index.css",
   "scripts": {
