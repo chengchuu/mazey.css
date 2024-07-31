@@ -1,5 +1,13 @@
 # mazey.css
 
+[![npm version][npm-image]][npm-url]
+[![l][l-image]][l-url]
+
+[npm-image]: https://img.shields.io/npm/v/mazey.css
+[npm-url]: https://npmjs.org/package/mazey.css
+[l-image]: https://img.shields.io/npm/l/mazey.css
+[l-url]: https://github.com/mazeyqian/mazey.css
+
 Confluence is a popular document tool for companies. But the support for Markdown is inferior. For example, it can't display the style of the table and code. Therefore, the project will supply the effect of it.
 
 ## Install
