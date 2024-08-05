@@ -8,7 +8,7 @@
     "build:confluence": "cross-env ENTRY=confluence webpack --config webpack.config.js",
     "build:tiny": "cross-env ENTRY=tiny webpack --config webpack.config.js",
     "build:404": "cross-env ENTRY=404 webpack --config webpack.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo 'Ready to write and run tests?' && exit 0"
   },
   "repository": {
     "type": "git",
