@@ -2,7 +2,7 @@ name: Publish npm Packages
 
 env:
   NODE_VERSION: '14'
-  PROJECT_NAME: 'mazey-npm-template'
+  PROJECT_NAME: 'mazey.css'
 
 on:
   push:
