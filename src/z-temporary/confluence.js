@@ -1,7 +1,5 @@
 import '../z-style/confluence.scss';
 
-console.log('confluence');
-
 // Area: `.wiki-content`
 if (window.$) {
   // Format
