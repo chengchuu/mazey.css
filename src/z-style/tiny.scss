@@ -4,11 +4,12 @@
 
 // 在父元素字体大小为 16px 的容器内绘制图形交互
 // Methods
+$TinyBoxLen: 16;
 @function pxToEm ($px) {
   @return calc($px / $TinyBoxLen) * 1em;
 }
+
 // Variates
-$TinyBoxLen: 16;
 $TinyBoxSize: $TinyBoxLen + px;
 $TinyPadding: pxToEm(20);
 $TinyPaddingSmall: pxToEm(8);
@@ -20,10 +21,10 @@ $TinyColorSub: #40a9ff;
   width: 100%;
   font-weight: 400;
   font-family: 'PingFang SC', 'Microsoft YaHei', 'Droid Sans Fallback', Arial, Helvetica, tahoma, sans-serif;
-  font-size: $TinyBoxSize; // 16px;
+  font-size: $TinyBoxSize;
   box-sizing: border-box;
   color: #111111;
-  padding: $TinyPadding; // 20px;
+  padding: $TinyPadding;
 
   div, input {
     box-sizing: border-box;
@@ -149,7 +150,6 @@ $TinyColorSub: #40a9ff;
         background: $bgc-silver;
         border-color: $bgc-silver;
         padding: pxToEm(0) pxToEm(5);
-        // margin-left: pxToEm(8);
         margin-right: pxToEm(8);
         font-size: pxToEm(12);
 
@@ -161,12 +161,11 @@ $TinyColorSub: #40a9ff;
 
       .copied {
         font-size: pxToEm(12);
-        // margin-left: pxToEm(8);
       }
     }
 
     &.is-qr {
-      padding: 0; // pxToEm(12);
+      padding: 0;
 
       .qr-code {
         display: flex;

@@ -13,10 +13,6 @@
       display: inline-flex;
     }
 
-    // &>br:nth-last-of-type(1) {
-    //   display: none;
-    // }
-
     &>br:nth-last-child(1) {
       display: none;
     }

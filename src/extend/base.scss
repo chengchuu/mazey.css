@@ -1,0 +1,38 @@
+%m-pointer {
+  cursor: pointer;
+}
+
+%m-show {
+  display: block;
+}
+
+%m-hide {
+  display: none;
+}
+
+%m-flex-middle {
+  display: flex;
+  align-items: center;
+}
+
+%m-flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+%m-flex-centre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%m-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+%m-wrap {
+  word-break: break-all;
+  word-wrap: break-word;
+}
