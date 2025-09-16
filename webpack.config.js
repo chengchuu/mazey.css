@@ -1,9 +1,9 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const ENTRY = process.env.ENTRY;
+const ENTRY = process.env.ENTRY || 'unknown';
 console.log(`ENTRY: ${ENTRY}`);
 
 module.exports = {
@@ -22,7 +22,6 @@ module.exports = {
         use: [
           // https://webpack.js.org/loaders/style-loader/#recommend
           // Do not use together style-loader and mini-css-extract-plugin.
-          // "style-loader",
           // https://stackoverflow.com/questions/52571793/error-in-using-the-webpack-mini-css-extract-plugin-plugin
           // mini-css-extract-plugin's loader only takes the output of css-loader as its input. 
           {
@@ -31,7 +30,6 @@ module.exports = {
           {
             loader: 'css-loader',
             // https://segmentfault.com/q/1010000009000432/a-1020000009000931
-            // options: { modules: true },
           },
           {
             loader: "sass-loader",
@@ -48,7 +46,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      // filename: `../style.min.css`
       filename: `${ENTRY}.css`,
     }),
     new HtmlWebpackPlugin({
@@ -57,8 +54,8 @@ module.exports = {
       inject: true,
       chunksSortMode: 'auto'
     }),
-    // new CleanWebpackPlugin({
-    //   cleanAfterEveryBuildPatterns: ['./*.js', './*.html'],
-    // }),
+    new webpack.DefinePlugin({
+      ENTRY: JSON.stringify(ENTRY),
+    }),
   ],
 };
