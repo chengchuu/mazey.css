@@ -44,3 +44,13 @@ tsconfig.json
 global.d.ts
 README_CN.md
 README_ZH.md
+
+# Secret folders&files
+*.secret/
+*.secret.conf
+*.secret.ini
+*.secret.js
+*.secret.css
+*.secret.html
+*.secret.scss
+*.secret.sh
