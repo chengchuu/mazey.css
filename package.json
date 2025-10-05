@@ -22,7 +22,11 @@
     "vue",
     "confluence"
   ],
-  "author": "Cheng",
+  "author": {
+    "name": "Cheng",
+    "email": "mazeyqian@gmail.com",
+    "url": "https://github.com/mazeyqian"
+  },
   "license": "GPL-2.0",
   "bugs": {
     "url": "https://github.com/mazeyqian/mazey.css/issues"
