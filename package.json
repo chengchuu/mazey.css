@@ -1,6 +1,6 @@
 {
   "name": "mazey.css",
-  "version": "1.3.0",
+  "version": "1.3.4",
   "description": "Mazey Style",
   "main": "lib/index.css",
   "scripts": {
@@ -8,11 +8,12 @@
     "build:confluence": "cross-env ENTRY=confluence webpack --config webpack.config.js",
     "build:tiny": "cross-env ENTRY=tiny webpack --config webpack.config.js",
     "build:404": "cross-env ENTRY=404 webpack --config webpack.config.js",
-    "test": "echo 'Ready to write and run tests?' && exit 0"
+    "test": "echo 'Ready to write and run tests?' && exit 0",
+    "build": "echo 'Building project...' && exit 0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mazeyqian/mazey.css.git"
+    "url": "git+https://github.com/chengchuu/mazey.css.git"
   },
   "keywords": [
     "css",
@@ -25,13 +26,13 @@
   "author": {
     "name": "Cheng",
     "email": "mazeyqian@gmail.com",
-    "url": "https://github.com/mazeyqian"
+    "url": "https://github.com/chengchuu"
   },
   "license": "GPL-2.0",
   "bugs": {
-    "url": "https://github.com/mazeyqian/mazey.css/issues"
+    "url": "https://github.com/chengchuu/mazey.css/issues"
   },
-  "homepage": "https://github.com/mazeyqian/mazey.css#readme",
+  "homepage": "https://github.com/chengchuu/mazey.css#readme",
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
     "cross-env": "^7.0.3",

@@ -6,7 +6,7 @@
 [npm-image]: https://img.shields.io/npm/v/mazey.css
 [npm-url]: https://npmjs.org/package/mazey.css
 [l-image]: https://img.shields.io/npm/l/mazey.css
-[l-url]: https://github.com/mazeyqian/mazey.css
+[l-url]: https://github.com/chengchuu/mazey.css
 
 ## Install
 
@@ -86,7 +86,7 @@ module.exports = defineConfig({
 ## Deploy
 
 ```bash
-git clone https://github.com/mazeyqian/mazey.css.git style
+git clone https://github.com/chengchuu/mazey.css.git style
 ```
 
 ### Confluence
@@ -115,4 +115,4 @@ Confluence is a popular document tool for companies. But the support for Markdow
 
 ## License
 
-This software is released under the terms of the [GPL-2.0 license](https://github.com/mazeyqian/mazey.css/blob/main/LICENSE).
+This software is released under the terms of the [GPL-2.0 license](https://github.com/chengchuu/mazey.css/blob/main/LICENSE).
