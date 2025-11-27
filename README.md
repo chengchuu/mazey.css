@@ -24,7 +24,7 @@ Of course, you can also download this file and serve it yourself. The file locat
 import 'mazey.css';
 ```
 
-## Webpack Configuration
+## webpack Configuration
 
 `webpack.config.js`:
 
