@@ -95,17 +95,21 @@ $TinyColorSub: #40a9ff;
   }
 
   .result-show {
+    @include dark-elem(color, rgba(0, 0, 0, 0.85));
+    @include dark-elem(background-color, #fff);
+    @include dark-elem(border-color, #f0f0f0);
+
     padding: pxToEm(24) pxToEm(24) pxToEm(12) pxToEm(24);
-    background: #fff;
     border-radius: pxToEm(2);
-    color: rgba(0, 0, 0, 0.85);
-    border: pxToEm(1) solid #f0f0f0;
+    border-width: pxToEm(1);
+    border-style: solid;
     margin-top: $TinyPadding;
     display: flex;
     flex-wrap: wrap;
 
     .copied {
-      color: #28a745;
+      @include dark-elem(color, #28a745);
+
       display: inline-flex;
       align-items: center;
     }
@@ -137,8 +141,9 @@ $TinyColorSub: #40a9ff;
     }
 
     a {
+      @include dark-elem(color, #111111);
+
       text-decoration: underline;
-      color: #111111;
     }
 
     &.is-backup {
@@ -151,17 +156,18 @@ $TinyColorSub: #40a9ff;
       }
 
       button {
+        @include dark-elem(color, $color-black);
+        @include dark-elem(background-color, $bgc-silver);
+        @include dark-elem(border-color, $bgc-silver);
+
         margin: 0;
-        color: $color-black;
-        background: $bgc-silver;
-        border-color: $bgc-silver;
         padding: pxToEm(0) pxToEm(5);
         margin-right: pxToEm(8);
         font-size: pxToEm(12);
 
         &:hover {
-          background: $bgc-silver;
-          border-color: $bgc-silver;
+          @include dark-elem(background-color, $bgc-silver);
+          @include dark-elem(border-color, $bgc-silver);
         }
       }
 
