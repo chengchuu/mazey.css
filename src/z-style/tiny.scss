@@ -1,6 +1,7 @@
 @charset "utf-8";
-@import "tiny-normalize";
 @import "../variate/index.scss";
+@import "../mixin/theme.scss";
+@import "tiny-normalize";
 
 // 在父元素字体大小为 16px 的容器内绘制图形交互
 // Methods
@@ -18,12 +19,13 @@ $TinyColorPrimary: #1890ff;
 $TinyColorSub: #40a9ff;
 
 .tiny-box {
+  @include dark-elem(color, #111111);
+
   width: 100%;
   font-weight: 400;
   font-family: 'PingFang SC', 'Microsoft YaHei', 'Droid Sans Fallback', Arial, Helvetica, tahoma, sans-serif;
   font-size: $TinyBoxSize;
   box-sizing: border-box;
-  color: #111111;
   padding: $TinyPadding;
 
   div, input {
@@ -36,11 +38,12 @@ $TinyColorSub: #40a9ff;
   }
 
   button {
+    @include dark-elem(color, #fff);
+    @include dark-elem(background, $TinyColorPrimary);
+    @include dark-elem(border-color, $TinyColorPrimary);
+
     font-weight: 400;
     text-align: center;
-    color: #fff;
-    background: $TinyColorPrimary;
-    border-color: $TinyColorPrimary;
     box-shadow: 0 pxToEm(2) 0 rgba(0, 0, 0, 0.045);
     text-shadow: 0 pxToEm(-1) 0 rgba(0, 0, 0, 0.12);
     outline: 0;
@@ -52,20 +55,23 @@ $TinyColorSub: #40a9ff;
     user-select: none;
 
     &:hover {
-      background: $TinyColorSub;
-      border-color: $TinyColorSub;
+      @include dark-elem(background, $TinyColorSub);
+      @include dark-elem(border-color, $TinyColorSub);
     }
   }
 
   input {
+    @include dark-elem(color, rgba(0, 0, 0, 0.85));
+    @include dark-elem(background-color, #fff);
+    @include dark-elem(border-color, #d9d9d9);
+
     margin: 0;
     font-variant: tabular-nums;
     list-style: none;
     padding: pxToEm(4) pxToEm(11);
-    color: rgba(0, 0, 0, 0.85);
-    background-color: #fff;
     background-image: none;
-    border: pxToEm(1) solid #d9d9d9;
+    border-width: pxToEm(1);
+    border-style: solid;
     border-radius: pxToEm(2);
     transition: all 0.3s;
     min-width: pxToEm(200 * 1.12);
