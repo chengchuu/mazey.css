@@ -39,7 +39,7 @@ $TinyColorSub: #40a9ff;
   }
 
   button {
-    @include theme.dark-elem(color, #fff);
+    @include theme.dark-elem(color, #ffffff);
     @include theme.dark-elem(background-color, $TinyColorPrimary);
     @include theme.dark-elem(border-color, $TinyColorPrimary);
 
@@ -63,7 +63,7 @@ $TinyColorSub: #40a9ff;
 
   input {
     @include theme.dark-elem(color, rgba(0, 0, 0, 0.85));
-    @include theme.dark-elem(background-color, #fff);
+    @include theme.dark-elem(background-color, #ffffff);
     @include theme.dark-elem(border-color, #d9d9d9);
 
     margin: 0;
@@ -98,7 +98,7 @@ $TinyColorSub: #40a9ff;
 
   .result-show {
     @include theme.dark-elem(color, rgba(0, 0, 0, 0.85));
-    @include theme.dark-elem(background-color, #fff);
+    @include theme.dark-elem(background-color, #ffffff);
     @include theme.dark-elem(border-color, #f0f0f0);
 
     padding: pxToEm(24) pxToEm(24) pxToEm(12) pxToEm(24);
