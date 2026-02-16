@@ -39,7 +39,7 @@ $TinyColorSub: #40a9ff;
 
   button {
     @include dark-elem(color, #fff);
-    @include dark-elem(background, $TinyColorPrimary);
+    @include dark-elem(background-color, $TinyColorPrimary);
     @include dark-elem(border-color, $TinyColorPrimary);
 
     font-weight: 400;
@@ -55,7 +55,7 @@ $TinyColorSub: #40a9ff;
     user-select: none;
 
     &:hover {
-      @include dark-elem(background, $TinyColorSub);
+      @include dark-elem(background-color, $TinyColorSub);
       @include dark-elem(border-color, $TinyColorSub);
     }
   }
