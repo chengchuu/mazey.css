@@ -1,7 +1,8 @@
 @charset "utf-8";
-@import "../variate/index.scss";
-@import "../mixin/theme.scss";
-@import "link-normalize";
+@use "sass:map";
+@use "../variate/index" as variate;
+@use "../mixin/theme";
+@use "link-normalize";
 
 // The parent element is a container with a font size of 16px
 // Methods
@@ -14,12 +15,12 @@ $TinyBoxLen: 16;
 $TinyBoxSize: $TinyBoxLen + px;
 $TinyPadding: pxToEm(20);
 $TinyPaddingSmall: pxToEm(8);
-$TinyWidthSmall: map-get($grid-breakpoints, sm);
+$TinyWidthSmall: map.get(variate.$grid-breakpoints, sm);
 $TinyColorPrimary: #1890ff;
 $TinyColorSub: #40a9ff;
 
 .tiny-box {
-  @include dark-elem(color, #111111);
+  @include theme.dark-elem(color, #111111);
 
   width: 100%;
   font-weight: 400;
@@ -38,9 +39,9 @@ $TinyColorSub: #40a9ff;
   }
 
   button {
-    @include dark-elem(color, #fff);
-    @include dark-elem(background-color, $TinyColorPrimary);
-    @include dark-elem(border-color, $TinyColorPrimary);
+    @include theme.dark-elem(color, #fff);
+    @include theme.dark-elem(background-color, $TinyColorPrimary);
+    @include theme.dark-elem(border-color, $TinyColorPrimary);
 
     font-weight: 400;
     text-align: center;
@@ -55,15 +56,15 @@ $TinyColorSub: #40a9ff;
     user-select: none;
 
     &:hover {
-      @include dark-elem(background-color, $TinyColorSub);
-      @include dark-elem(border-color, $TinyColorSub);
+      @include theme.dark-elem(background-color, $TinyColorSub);
+      @include theme.dark-elem(border-color, $TinyColorSub);
     }
   }
 
   input {
-    @include dark-elem(color, rgba(0, 0, 0, 0.85));
-    @include dark-elem(background-color, #fff);
-    @include dark-elem(border-color, #d9d9d9);
+    @include theme.dark-elem(color, rgba(0, 0, 0, 0.85));
+    @include theme.dark-elem(background-color, #fff);
+    @include theme.dark-elem(border-color, #d9d9d9);
 
     margin: 0;
     font-variant: tabular-nums;
@@ -78,7 +79,7 @@ $TinyColorSub: #40a9ff;
     width: pxToEm(200 * 1.12);
 
     &:focus {
-      @include dark-elem(border-color, $TinyColorSub);
+      @include theme.dark-elem(border-color, $TinyColorSub);
 
       outline: 0;
       box-shadow: 0 0 0 pxToEm(2) rgba(24, 144, 255, 0.2);
@@ -96,9 +97,9 @@ $TinyColorSub: #40a9ff;
   }
 
   .result-show {
-    @include dark-elem(color, rgba(0, 0, 0, 0.85));
-    @include dark-elem(background-color, #fff);
-    @include dark-elem(border-color, #f0f0f0);
+    @include theme.dark-elem(color, rgba(0, 0, 0, 0.85));
+    @include theme.dark-elem(background-color, #fff);
+    @include theme.dark-elem(border-color, #f0f0f0);
 
     padding: pxToEm(24) pxToEm(24) pxToEm(12) pxToEm(24);
     border-radius: pxToEm(2);
@@ -109,7 +110,7 @@ $TinyColorSub: #40a9ff;
     flex-wrap: wrap;
 
     .copied {
-      @include dark-elem(color, #28a745);
+      @include theme.dark-elem(color, #28a745);
 
       display: inline-flex;
       align-items: center;
@@ -142,7 +143,7 @@ $TinyColorSub: #40a9ff;
     }
 
     a {
-      @include dark-elem(color, #111111);
+      @include theme.dark-elem(color, #111111);
 
       text-decoration: underline;
     }
@@ -157,9 +158,9 @@ $TinyColorSub: #40a9ff;
       }
 
       button {
-        @include dark-elem(color, $color-black);
-        @include dark-elem(background-color, $bgc-silver);
-        @include dark-elem(border-color, $bgc-silver);
+        @include theme.dark-elem(color, variate.$color-black);
+        @include theme.dark-elem(background-color, variate.$bgc-silver);
+        @include theme.dark-elem(border-color, variate.$bgc-silver);
 
         margin: 0;
         padding: pxToEm(0) pxToEm(5);
@@ -167,8 +168,8 @@ $TinyColorSub: #40a9ff;
         font-size: pxToEm(12);
 
         &:hover {
-          @include dark-elem(background-color, $bgc-silver);
-          @include dark-elem(border-color, $bgc-silver);
+          @include theme.dark-elem(background-color, variate.$bgc-silver);
+          @include theme.dark-elem(border-color, variate.$bgc-silver);
         }
       }
 

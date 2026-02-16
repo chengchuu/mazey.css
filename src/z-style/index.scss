@@ -1,5 +1,5 @@
 @charset "utf-8";
-@import "../variate/index";
-@import "../extend/index";
-@import "../mixin/index";
-@import "./normalize.scss";
+@use "../variate/index";
+@use "../extend/index" as index2;
+@use "../mixin/index" as index3;
+@use "normalize.scss";

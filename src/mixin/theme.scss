@@ -1,3 +1,4 @@
+@use "sass:color";
 // Method 1: Images and multi-colored icons: saturation reduced by 15%, brightness reduced by 3%
 @mixin dark-img {
   filter: saturate(85%) brightness(97%);
@@ -6,7 +7,7 @@
 
 // Method 2: For backgrounds - if brightness is less than 25%, do not convert
 @mixin dark-bg($name, $color) {
-  $l1: lightness($color);
+  $l1: color.lightness($color);
   @if ($l1 < 25%) {
     #{$name}: $color;
     @include night() {
@@ -30,7 +31,7 @@
 
 // Method 4: Text/Icons/Buttons (plates), including pure white strokes, are not converted
 @mixin dark-elem($name, $color) {
-  @if (lightness($color) == 100%) {
+  @if (color.lightness($color) == 100%) {
     #{$name}: $color;
     @include night() {
       #{$name}: $color;
@@ -68,9 +69,9 @@
 }
 
 @function calculate($color, $type: 'default') {
-  $h1: hue($color);
-  $s1: saturation($color);
-  $l1: lightness($color);
+  $h1: color.hue($color);
+  $s1: color.saturation($color);
+  $l1: color.lightness($color);
   $h2: $h1;
   $s2: $s1;
   $l2: $l1;
