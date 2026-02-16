@@ -1,7 +1,7 @@
 @charset "utf-8";
 @import "../variate/index.scss";
 @import "../mixin/theme.scss";
-@import "tiny-normalize";
+@import "link-normalize";
 
 // 在父元素字体大小为 16px 的容器内绘制图形交互
 // Methods
@@ -78,7 +78,8 @@ $TinyColorSub: #40a9ff;
     width: pxToEm(200 * 1.12);
 
     &:focus {
-      border-color: $TinyColorSub;
+      @include dark-elem(border-color, $TinyColorSub);
+
       outline: 0;
       box-shadow: 0 0 0 pxToEm(2) rgba(24, 144, 255, 0.2);
     }
