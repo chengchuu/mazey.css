@@ -17,6 +17,10 @@ module.exports = {
     filename: '[name].js',
     path: path.resolve(__dirname, 'lib'),
   },
+  watchOptions: {
+    ignored: /node_modules/,
+    aggregateTimeout: 300,
+  },
   module: {
     rules: [
       {

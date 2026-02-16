@@ -4,5 +4,5 @@ set -e
 echo "Installing dependencies ..."
 npm install
 
-echo "Starting webpack watch mode for all configurations ..."
-npm run watch:all
+echo "Starting webpack watch mode ..."
+npm run watch:link
