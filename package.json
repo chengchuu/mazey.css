@@ -7,6 +7,7 @@
     "build:index": "cross-env ENTRY=index webpack --config webpack.config.js",
     "build:confluence": "cross-env ENTRY=confluence webpack --config webpack.config.js",
     "build:link": "cross-env ENTRY=link webpack --config webpack.config.js",
+    "watch:link": "cross-env ENTRY=link webpack --config webpack.config.js --watch",
     "build:404": "cross-env ENTRY=404 webpack --config webpack.config.js",
     "test": "echo 'Ready to write and run tests?' && exit 0",
     "build": "echo 'Building project...' && exit 0"
