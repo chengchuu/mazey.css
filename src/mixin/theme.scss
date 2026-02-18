@@ -1,5 +1,12 @@
 @use "sass:color";
 
+// Theme variables mixin
+@mixin theme-vars($theme) {
+  @each $key, $value in $theme {
+    --color-#{$key}: #{$value};
+  }
+}
+
 // Images and multi-colored icons: saturation reduced by 15%, brightness reduced by 3%
 @mixin dark-img {
   filter: saturate(85%) brightness(97%);
