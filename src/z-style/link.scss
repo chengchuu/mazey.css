@@ -4,9 +4,11 @@
 @use "../mixin/theme";
 @use "link-normalize";
 
+// Variables
 // The parent element is a container with a font size of 16px
-// Methods
 $TinyBoxLen: 16;
+
+// Methods
 @function pxToEm ($px) {
   @return calc($px / $TinyBoxLen) * 1em;
 }
