@@ -1,11 +1,12 @@
 @use "sass:color";
-// Method 1: Images and multi-colored icons: saturation reduced by 15%, brightness reduced by 3%
+
+// Images and multi-colored icons: saturation reduced by 15%, brightness reduced by 3%
 @mixin dark-img {
   filter: saturate(85%) brightness(97%);
   will-change: filter;
 }
 
-// Method 2: For backgrounds - if brightness is less than 25%, do not convert
+// For backgrounds - if brightness is less than 25%, do not convert
 @mixin dark-bg($name, $color) {
   $l1: color.lightness($color);
   @if ($l1 < 25%) {
@@ -21,7 +22,7 @@
   }
 }
 
-// Method 3: Light gray backgrounds or divider lines
+// Light gray backgrounds or divider lines
 @mixin dark-gray-bg($name, $color) {
   #{$name}: $color;
   @include night() {
@@ -29,7 +30,7 @@
   }
 }
 
-// Method 4: Text/Icons/Buttons (plates), including pure white strokes, are not converted
+// Text/Icons/Buttons (plates), including pure white strokes, are not converted
 @mixin dark-elem($name, $color) {
   @if (color.lightness($color) == 100%) {
     #{$name}: $color;
@@ -44,7 +45,7 @@
   }
 }
 
-// Method 5: Custom transformation
+// Custom transformation
 @mixin dark-cus($name, $lightCSS, $darkCSS) {
   #{$name}: $lightCSS;
   @include night() {
@@ -52,7 +53,7 @@
   }
 }
 
-// Method 6: Direct mixin for night mode overrides
+// Direct mixin for night mode overrides
 @mixin dark-mixin($name, $value) {
   [data-theme="dark"] & {
     #{$name}: $value;
