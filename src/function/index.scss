@@ -53,3 +53,7 @@
 
   @return hsl($h2, $s2, $l2);
 }
+
+@function pxToEm($px, $base: 16) {
+  @return calc($px / $base) * 1em;
+}

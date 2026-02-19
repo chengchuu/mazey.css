@@ -9,30 +9,39 @@
 $theme-light: (
   lk-pri: #1890ff,
   lk-sub: #40a9ff,
-  bg: #ffffff,
-  text: #111111,
-  text-muted: #666666,
-  border: #e5e5e5,
+  lk-bg: #eeeeee,
+  lk-input-bg: #ffffff,
+  lk-text: #111111,
+  lk-text-sub: rgba(0, 0, 0, 0.85),
+  lk-btn-text: #ffffff,
+  lk-border: #d9d9d9,
+  lk-border-sub: #f0f0f0,
+  lk-success: #28a745,
+  lk-bgc-silver: variate.$bgc-silver,
 );
 $theme-dark: (
   lk-pri: function.dark-color(#1890ff),
   lk-sub: function.dark-color(#40a9ff),
+  lk-bg: function.dark-color(#eeeeee),
+  lk-input-bg: function.dark-color(#ffffff),
+  lk-text: function.dark-color(#111111),
+  lk-text-sub: function.dark-color(#111111),
+  lk-btn-text: function.dark-color(#ffffff),
+  lk-border: function.dark-color(#d9d9d9),
+  lk-border-sub: function.dark-color(#f0f0f0),
+  lk-success: function.dark-color(#28a745),
+  lk-bgc-silver: function.dark-color(variate.$bgc-silver),
 );
 
 // Variates
 // The parent element is a container with a font size of 16px
 $TinyBoxLen: 16;
 $TinyBoxSize: $TinyBoxLen + px;
-$TinyPadding: pxToEm(20);
-$TinyPaddingSmall: pxToEm(8);
+$TinyPadding: function.pxToEm(20);
+$TinyPaddingSmall: function.pxToEm(8);
 $TinyWidthSmall: map.get(variate.$grid-breakpoints, sm);
 $TinyColorPrimary: #1890ff;
 $TinyColorSub: #40a9ff;
-
-// Methods
-@function pxToEm ($px) {
-  @return calc($px / $TinyBoxLen) * 1em;
-}
 
 :root {
   @include theme.theme-vars($theme-light);
@@ -43,8 +52,8 @@ $TinyColorSub: #40a9ff;
 }
 
 .tiny-box {
-  @include theme.dark-elem(color, #111111);
-
+  color: var(--color-lk-text);
+  background-color: var(--color-lk-bg);
   width: 100%;
   font-weight: 400;
   font-family: 'PingFang SC', 'Microsoft YaHei', 'Droid Sans Fallback', Arial, Helvetica, tahoma, sans-serif;
@@ -57,57 +66,52 @@ $TinyColorSub: #40a9ff;
   }
 
   input, button, a, span {
-    font-size: pxToEm(16);
+    font-size: function.pxToEm(16);
     line-height: 1.5;
   }
 
   button {
-    @include theme.dark-elem(color, #ffffff);
-    // @include theme.dark-elem(background-color, $TinyColorPrimary);
-    // @include theme.dark-elem(border-color, $TinyColorPrimary);
-
+    color: var(--color-lk-btn-text);
     background-color: var(--color-lk-pri);
     border-color: var(--color-lk-pri);
     font-weight: 400;
     text-align: center;
-    box-shadow: 0 pxToEm(2) 0 rgba(0, 0, 0, 0.045);
-    text-shadow: 0 pxToEm(-1) 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 function.pxToEm(2) 0 rgba(0, 0, 0, 0.045);
+    text-shadow: 0 function.pxToEm(-1) 0 rgba(0, 0, 0, 0.12);
     outline: 0;
-    border: pxToEm(1) solid transparent;
+    border: function.pxToEm(1) solid transparent;
     cursor: pointer;
     white-space: nowrap;
-    padding: pxToEm(3) pxToEm(15);
-    border-radius: pxToEm(2);
+    padding: function.pxToEm(3) function.pxToEm(15);
+    border-radius: function.pxToEm(2);
     user-select: none;
 
     &:hover {
-      @include theme.dark-elem(background-color, $TinyColorSub);
-      @include theme.dark-elem(border-color, $TinyColorSub);
+      background-color: var(--color-lk-sub);
+      border-color: var(--color-lk-sub);
     }
   }
 
   input {
-    @include theme.dark-elem(color, rgba(0, 0, 0, 0.85));
-    @include theme.dark-elem(background-color, #ffffff);
-    @include theme.dark-elem(border-color, #d9d9d9);
-
+    color: var(--color-lk-text-sub);
+    background-color: var(--color-lk-input-bg);
+    border-color: var(--color-lk-border);
     margin: 0;
     font-variant: tabular-nums;
     list-style: none;
-    padding: pxToEm(4) pxToEm(11);
+    padding: function.pxToEm(4) function.pxToEm(11);
     background-image: none;
-    border-width: pxToEm(1);
+    border-width: function.pxToEm(1);
     border-style: solid;
-    border-radius: pxToEm(2);
+    border-radius: function.pxToEm(2);
     transition: all 0.3s;
-    min-width: pxToEm(200 * 1.12);
-    width: pxToEm(200 * 1.12);
+    min-width: function.pxToEm(200 * 1.12);
+    width: function.pxToEm(200 * 1.12);
 
     &:focus {
-      @include theme.dark-elem(border-color, $TinyColorSub);
-
+      border-color: var(--color-lk-sub);
       outline: 0;
-      box-shadow: 0 0 0 pxToEm(2) rgba(24, 144, 255, 0.2);
+      box-shadow: 0 0 0 function.pxToEm(2) rgba(24, 144, 255, 0.2);
     }
   }
 
@@ -116,40 +120,38 @@ $TinyColorSub: #40a9ff;
     justify-content: space-between;
 
     >input {
-      margin-right: pxToEm(16);
+      margin-right: function.pxToEm(16);
       flex: 1 0 auto;
     }
   }
 
   .result-show {
-    @include theme.dark-elem(color, rgba(0, 0, 0, 0.85));
-    @include theme.dark-elem(background-color, #ffffff);
-    @include theme.dark-elem(border-color, #f0f0f0);
-
-    padding: pxToEm(24) pxToEm(24) pxToEm(12) pxToEm(24);
-    border-radius: pxToEm(2);
-    border-width: pxToEm(1);
+    color: var(--color-lk-text-sub);
+    background-color: var(--color-lk-input-bg);
+    border-color: var(--color-lk-border-sub);
+    padding: function.pxToEm(24) function.pxToEm(24) function.pxToEm(12) function.pxToEm(24);
+    border-radius: function.pxToEm(2);
+    border-width: function.pxToEm(1);
     border-style: solid;
     margin-top: $TinyPadding;
     display: flex;
     flex-wrap: wrap;
 
     .copied {
-      @include theme.dark-elem(color, #28a745);
-
+      color: var(--color-lk-success);
       display: inline-flex;
       align-items: center;
     }
 
     .placeholder {
-      font-size: pxToEm(14);
+      font-size: function.pxToEm(14);
       display: inline-flex;
       align-items: center;
     }
 
     a, input, button, span {
-      margin-right: pxToEm(10);
-      margin-bottom: pxToEm(12);
+      margin-right: function.pxToEm(10);
+      margin-bottom: function.pxToEm(12);
     }
   }
 
@@ -158,48 +160,46 @@ $TinyColorSub: #40a9ff;
 
     margin-top: $TinyPaddingSmall;
     align-items: center;
-    padding-bottom: pxToEm(24);
+    padding-bottom: function.pxToEm(24);
 
     span, a {
       margin: 0;
       display: flex;
       justify-items: center;
-      font-size: pxToEm(14);
+      font-size: function.pxToEm(14);
     }
 
     a {
-      @include theme.dark-elem(color, #111111);
-
+      color: var(--color-lk-text);
       text-decoration: underline;
     }
 
     &.is-backup {
       span {
-        font-size: pxToEm(13);
+        font-size: function.pxToEm(13);
       }
 
       a {
-        margin-right: pxToEm(8);
+        margin-right: function.pxToEm(8);
       }
 
       button {
-        @include theme.dark-elem(color, variate.$color-black);
-        @include theme.dark-elem(background-color, variate.$bgc-silver);
-        @include theme.dark-elem(border-color, variate.$bgc-silver);
-
+        color: var(--color-lk-text);
+        background-color: var(--color-lk-bgc-silver);
+        border-color: var(--color-lk-bgc-silver);
         margin: 0;
-        padding: pxToEm(0) pxToEm(5);
-        margin-right: pxToEm(8);
-        font-size: pxToEm(12);
+        padding: function.pxToEm(0) function.pxToEm(5);
+        margin-right: function.pxToEm(8);
+        font-size: function.pxToEm(12);
 
         &:hover {
-          @include theme.dark-elem(background-color, variate.$bgc-silver);
-          @include theme.dark-elem(border-color, variate.$bgc-silver);
+          background-color: var(--color-lk-bgc-silver);
+          border-color: var(--color-lk-bgc-silver);
         }
       }
 
       .copied {
-        font-size: pxToEm(12);
+        font-size: function.pxToEm(12);
       }
     }
 
@@ -211,7 +211,7 @@ $TinyColorSub: #40a9ff;
       }
 
       canvas {
-        margin: pxToEm(12) pxToEm(12) pxToEm(12) pxToEm(18);
+        margin: function.pxToEm(12) function.pxToEm(12) function.pxToEm(12) function.pxToEm(18);
       }
     }
   }
