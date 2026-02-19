@@ -10,26 +10,26 @@ $theme-light: (
   lk-pri: #1890ff,
   lk-sub: #40a9ff,
   lk-bg: #eeeeee,
-  lk-input-bg: #ffffff,
-  lk-text: #111111,
+  lk-input-bg: variate.$color-white,
+  lk-text: variate.$color-black,
   lk-text-sub: rgba(0, 0, 0, 0.85),
-  lk-btn-text: #ffffff,
+  lk-btn-text: variate.$color-white,
   lk-border: #d9d9d9,
   lk-border-sub: #f0f0f0,
-  lk-success: #28a745,
+  lk-success: variate.$color-green,
   lk-bgc-silver: variate.$bgc-silver,
 );
 $theme-dark: (
   lk-pri: function.dark-color(#1890ff),
   lk-sub: function.dark-color(#40a9ff),
   lk-bg: function.dark-color(#eeeeee),
-  lk-input-bg: function.dark-color(#ffffff),
-  lk-text: function.dark-color(#111111),
-  lk-text-sub: function.dark-color(#111111),
-  lk-btn-text: function.dark-color(#ffffff),
+  lk-input-bg: function.dark-color(variate.$color-white),
+  lk-text: function.dark-color(variate.$color-black),
+  lk-text-sub: function.dark-color(variate.$color-black),
+  lk-btn-text: function.dark-color(variate.$color-white),
   lk-border: function.dark-color(#d9d9d9),
   lk-border-sub: function.dark-color(#f0f0f0),
-  lk-success: function.dark-color(#28a745),
+  lk-success: function.dark-color(variate.$color-green),
   lk-bgc-silver: function.dark-color(variate.$bgc-silver),
 );
 
@@ -40,8 +40,6 @@ $TinyBoxSize: $TinyBoxLen + px;
 $TinyPadding: function.pxToEm(20);
 $TinyPaddingSmall: function.pxToEm(8);
 $TinyWidthSmall: map.get(variate.$grid-breakpoints, sm);
-$TinyColorPrimary: #1890ff;
-$TinyColorSub: #40a9ff;
 
 :root {
   @include theme.theme-vars($theme-light);
