@@ -5,6 +5,13 @@
 @use "../mixin/theme";
 @use "link-normalize";
 
+// Variates
+// The parent element is a container with a font size of 16px
+$TinyBoxLen: 16;
+$TinyBoxSize: $TinyBoxLen + px;
+$TinyPadding: function.pxToEm(20);
+$TinyPaddingSmall: function.pxToEm(8);
+$TinyWidthSmall: map.get(variate.$grid-breakpoints, sm);
 // Color
 $theme-light: (
   lk-pri: #1890ff,
@@ -32,14 +39,6 @@ $theme-dark: (
   lk-success: function.dark-color(variate.$color-green),
   lk-bgc-silver: function.dark-color(variate.$bgc-silver),
 );
-
-// Variates
-// The parent element is a container with a font size of 16px
-$TinyBoxLen: 16;
-$TinyBoxSize: $TinyBoxLen + px;
-$TinyPadding: function.pxToEm(20);
-$TinyPaddingSmall: function.pxToEm(8);
-$TinyWidthSmall: map.get(variate.$grid-breakpoints, sm);
 
 :root {
   @include theme.theme-vars($theme-light);
