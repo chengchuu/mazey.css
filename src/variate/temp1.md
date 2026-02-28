@@ -1,3 +1,49 @@
+variate/index.scss
+
+```scss
+// Primary Colors
+$color-white: #ffffff;
+$color-green: #2ECC40;
+$color-red: #FF4136;
+$color-black: #111111;
+$color-orange: #FF851B;
+$color-yellow: #FFDC00;
+$color-blue: #0074D9;
+$color-purple: #B10DC9;
+
+// Background Colors
+$bgc-navy: #001F3F;
+$bgc-blue: #0074D9;
+$bgc-aqua: #7FDBFF;
+$bgc-teal: #39CCCC;
+$bgc-olive: #3D9970;
+$bgc-green: #2ECC40;
+$bgc-lime: #01FF70;
+$bgc-yellow: #FFDC00;
+$bgc-orange: #FF851B;
+$bgc-red: #FF4136;
+$bgc-fuchsia: #F012BE;
+$bgc-purple: #B10DC9;
+$bgc-maroon: #85144B;
+$bgc-white: #FFFFFF;
+$bgc-gray: #AAAAAA;
+$bgc-silver: #DDDDDD;
+$bgc-black: #111111;
+
+// Breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+```
+
+base.scss
+
+```scss
 @use "sass:map";
 @use "../variate/index" as variate;
 
@@ -5,7 +51,7 @@
 // Semantic defaults
 // --------------------
 $font-stack: 'PingFang SC', 'Microsoft YaHei', 'Droid Sans Fallback', SimHei, Arial, Helvetica, tahoma, sans-serif;
-$bg-default: #f6f8fb;
+$bg-default: #f6f8fb; // friendly non-pure-white fallback
 $text-default: #1f2937;
 $text-muted: #4b5563;
 $card-default: #ffffff;
@@ -13,9 +59,9 @@ $accent-default: variate.$color-blue;
 
 // Width control for responsive behavior
 $content-max-widths: (
-  sm: 92%,
-  md: 86%,
-  lg: 760px,
+  sm: 92%,    // tiny screens
+  md: 86%,    // small tablets
+  lg: 760px,  // desktops
   xl: 840px,
   xxl: 920px
 );
@@ -39,6 +85,7 @@ $content-max-widths: (
 
 // --------------------
 // Base reset-ish styles
+// Old-browser-friendly defaults first
 // --------------------
 html,
 body {
@@ -52,15 +99,21 @@ body {
   font-family: $font-stack;
   line-height: 1.5;
   color: $text-default;
-  background: $bg-default;
+  background: $bg-default; // fallback first
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
 // --------------------
 // Main layout
+// Expected minimal markup:
+// <main class="status-page status-page--404">
+//   <h1>404</h1>
+//   <p>Page not found.</p>
+// </main>
 // --------------------
 .status-page {
+  // Fallback for old browsers (no flex)
   width: content-width(sm);
   max-width: 100%;
   margin: 3rem auto;
@@ -72,27 +125,22 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(variate.$color-black, 0.06);
 
-  // Old browser fallback first
+  // Preferred layout
   min-height: calc(100vh - 6rem);
-  display: block;
-
-  // Modern layout enhancement
-  @supports (display: flex) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   @include up(md) {
     width: content-width(md);
-    padding: 2rem;
+    padding: 2rem 2rem;
   }
 
   @include up(lg) {
     width: content-width(lg);
     min-height: calc(100vh - 8rem);
     margin: 4rem auto;
-    padding: 2.5rem;
+    padding: 2.5rem 2.5rem;
   }
 
   @include up(xl) {
@@ -113,7 +161,6 @@ body {
     line-height: 1.2;
     letter-spacing: 0.01em;
     color: inherit;
-    word-break: break-word;
   }
 
   p {
@@ -121,12 +168,12 @@ body {
     font-size: clamp(1rem, 1.8vw, 1.125rem);
     color: $text-muted;
     max-width: 60ch;
-    overflow-wrap: anywhere;
   }
 }
 
 // --------------------
 // Status variants
+// Use one class to switch tone per page type
 // --------------------
 .status-page--404,
 .status-page--40x {
@@ -145,17 +192,21 @@ body {
   border-top: 6px solid variate.$color-purple;
 }
 
-.status-page--accent h1 {
-  color: $accent-default;
+// Optional accent utility for h1 (if needed)
+.status-page--accent {
+  h1 {
+    color: $accent-default;
+  }
 }
 
 // --------------------
-// Dark mode
+// Dark mode (modern browsers)
+// Old browsers keep light mode above
 // --------------------
 @media (prefers-color-scheme: dark) {
   body {
     color: #e5e7eb;
-    background: #0f172a;
+    background: #0f172a; // friendly dark navy-like
   }
 
   .status-page {
@@ -185,23 +236,4 @@ body {
     border-top-color: #d58bf3;
   }
 }
-
-// Optional no-media-query fallback for server-rendered theme class
-// (No JavaScript required if backend sets class on <html> or <body>)
-.theme-dark {
-  body,
-  &.body {
-    color: #e5e7eb;
-    background: #0f172a;
-  }
-
-  .status-page {
-    background: #111827;
-    border-color: rgba(variate.$color-white, 0.12);
-    box-shadow: 0 8px 30px rgba(variate.$color-black, 0.45);
-
-    p {
-      color: #cbd5e1;
-    }
-  }
-}
+```
