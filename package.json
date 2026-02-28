@@ -4,6 +4,7 @@
   "description": "Mazey Style",
   "main": "lib/index.css",
   "scripts": {
+    "nvm:14": "nvm use 14",
     "build:index": "cross-env ENTRY=index webpack --config webpack.config.js",
     "build:confluence": "cross-env ENTRY=confluence webpack --config webpack.config.js",
     "build:link": "cross-env ENTRY=link webpack --config webpack.config.js",
