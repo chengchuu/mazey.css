@@ -21,6 +21,20 @@ $content-max-widths: (
 );
 
 // --------------------
+// Status border colors (defined in base.scss)
+// --------------------
+$status-border-40x: variate.$color-orange;
+$status-border-50x: variate.$color-red;
+$status-border-offline: variate.$color-blue;
+$status-border-maintenance: variate.$color-purple;
+
+// Dark mode status border colors
+$status-border-dark-40x: #ffb357;
+$status-border-dark-50x: #ff6b63;
+$status-border-dark-offline: #66b3ff;
+$status-border-dark-maintenance: #d58bf3;
+
+// --------------------
 // Helpers
 // --------------------
 @function bp($name) {
@@ -130,19 +144,19 @@ body {
 // --------------------
 .status-page--404,
 .status-page--40x {
-  border-top: 6px solid variate.$color-orange;
+  border-top: 6px solid $status-border-40x;
 }
 
 .status-page--50x {
-  border-top: 6px solid variate.$color-red;
+  border-top: 6px solid $status-border-50x;
 }
 
 .status-page--offline {
-  border-top: 6px solid variate.$color-blue;
+  border-top: 6px solid $status-border-offline;
 }
 
 .status-page--maintenance {
-  border-top: 6px solid variate.$color-purple;
+  border-top: 6px solid $status-border-maintenance;
 }
 
 .status-page--accent h1 {
@@ -170,38 +184,18 @@ body {
 
   .status-page--404,
   .status-page--40x {
-    border-top-color: #ffb357;
+    border-top-color: $status-border-dark-40x;
   }
 
   .status-page--50x {
-    border-top-color: #ff6b63;
+    border-top-color: $status-border-dark-50x;
   }
 
   .status-page--offline {
-    border-top-color: #66b3ff;
+    border-top-color: $status-border-dark-offline;
   }
 
   .status-page--maintenance {
-    border-top-color: #d58bf3;
-  }
-}
-
-// Optional no-media-query fallback for server-rendered theme class
-// (No JavaScript required if backend sets class on <html> or <body>)
-.theme-dark {
-  body,
-  &.body {
-    color: #e5e7eb;
-    background: #0f172a;
-  }
-
-  .status-page {
-    background: #111827;
-    border-color: rgba(variate.$color-white, 0.12);
-    box-shadow: 0 8px 30px rgba(variate.$color-black, 0.45);
-
-    p {
-      color: #cbd5e1;
-    }
+    border-top-color: $status-border-dark-maintenance;
   }
 }
