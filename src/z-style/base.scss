@@ -35,6 +35,16 @@ $status-border-dark-offline: #66b3ff;
 $status-border-dark-maintenance: #d58bf3;
 
 // --------------------
+// Dark mode semantic colors (defined in base.scss)
+// --------------------
+$dark-text-default: #e5e7eb;
+$dark-body-bg: #0f172a;
+$dark-card-bg: #111827;
+$dark-text-muted: #cbd5e1;
+$dark-card-border: rgba(variate.$color-white, 0.12);
+$dark-card-shadow: 0 8px 30px rgba(variate.$color-black, 0.45);
+
+// --------------------
 // Helpers
 // --------------------
 @function bp($name) {
@@ -168,17 +178,17 @@ body {
 // --------------------
 @media (prefers-color-scheme: dark) {
   body {
-    color: #e5e7eb;
-    background: #0f172a;
+    color: $dark-text-default;
+    background: $dark-body-bg;
   }
 
   .status-page {
-    background: #111827;
-    border-color: rgba(variate.$color-white, 0.12);
-    box-shadow: 0 8px 30px rgba(variate.$color-black, 0.45);
+    background: $dark-card-bg;
+    border-color: $dark-card-border;
+    box-shadow: $dark-card-shadow;
 
     p {
-      color: #cbd5e1;
+      color: $dark-text-muted;
     }
   }
 
