@@ -1,4 +1,5 @@
-@import "../variate/index";
+@use "sass:map";
+@use "../variate/index" as variate;
 
 // --------------------
 // Semantic defaults
@@ -8,7 +9,7 @@ $bg-default: #f6f8fb; // friendly non-pure-white fallback
 $text-default: #1f2937;
 $text-muted: #4b5563;
 $card-default: #ffffff;
-$accent-default: $color-blue;
+$accent-default: variate.$color-blue;
 
 // Width control for responsive behavior
 $content-max-widths: (
@@ -23,11 +24,11 @@ $content-max-widths: (
 // Helpers
 // --------------------
 @function bp($name) {
-  @return map-get($grid-breakpoints, $name);
+  @return map.get(variate.$grid-breakpoints, $name);
 }
 
 @function content-width($name) {
-  @return map-get($content-max-widths, $name);
+  @return map.get($content-max-widths, $name);
 }
 
 @mixin up($name) {
@@ -74,9 +75,9 @@ body {
   box-sizing: border-box;
 
   background: $card-default;
-  border: 1px solid rgba($color-black, 0.08);
+  border: 1px solid rgba(variate.$color-black, 0.08);
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba($color-black, 0.06);
+  box-shadow: 0 4px 20px rgba(variate.$color-black, 0.06);
 
   // Preferred layout
   min-height: calc(100vh - 6rem);
@@ -130,19 +131,19 @@ body {
 // --------------------
 .status-page--404,
 .status-page--40x {
-  border-top: 6px solid $color-orange;
+  border-top: 6px solid variate.$color-orange;
 }
 
 .status-page--50x {
-  border-top: 6px solid $color-red;
+  border-top: 6px solid variate.$color-red;
 }
 
 .status-page--offline {
-  border-top: 6px solid $color-blue;
+  border-top: 6px solid variate.$color-blue;
 }
 
 .status-page--maintenance {
-  border-top: 6px solid $color-purple;
+  border-top: 6px solid variate.$color-purple;
 }
 
 // Optional accent utility for h1 (if needed)
@@ -164,8 +165,8 @@ body {
 
   .status-page {
     background: #111827;
-    border-color: rgba($color-white, 0.12);
-    box-shadow: 0 8px 30px rgba($color-black, 0.45);
+    border-color: rgba(variate.$color-white, 0.12);
+    box-shadow: 0 8px 30px rgba(variate.$color-black, 0.45);
 
     p {
       color: #cbd5e1;
