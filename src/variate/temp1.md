@@ -51,7 +51,7 @@ base.scss
 // Semantic defaults
 // --------------------
 $font-stack: 'PingFang SC', 'Microsoft YaHei', 'Droid Sans Fallback', SimHei, Arial, Helvetica, tahoma, sans-serif;
-$bg-default: #f6f8fb; // friendly non-pure-white fallback
+$bg-default: #f6f8fb;
 $text-default: #1f2937;
 $text-muted: #4b5563;
 $card-default: #ffffff;
@@ -59,12 +59,26 @@ $accent-default: variate.$color-blue;
 
 // Width control for responsive behavior
 $content-max-widths: (
-  sm: 92%,    // tiny screens
-  md: 86%,    // small tablets
-  lg: 760px,  // desktops
+  sm: 92%,
+  md: 86%,
+  lg: 760px,
   xl: 840px,
   xxl: 920px
 );
+
+// --------------------
+// Status border colors (defined in base.scss)
+// --------------------
+$status-border-40x: variate.$color-orange;
+$status-border-50x: variate.$color-red;
+$status-border-offline: variate.$color-blue;
+$status-border-maintenance: variate.$color-purple;
+
+// Dark mode status border colors
+$status-border-dark-40x: #ffb357;
+$status-border-dark-50x: #ff6b63;
+$status-border-dark-offline: #66b3ff;
+$status-border-dark-maintenance: #d58bf3;
 
 // --------------------
 // Helpers
@@ -85,7 +99,6 @@ $content-max-widths: (
 
 // --------------------
 // Base reset-ish styles
-// Old-browser-friendly defaults first
 // --------------------
 html,
 body {
@@ -99,21 +112,15 @@ body {
   font-family: $font-stack;
   line-height: 1.5;
   color: $text-default;
-  background: $bg-default; // fallback first
+  background: $bg-default;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
 // --------------------
 // Main layout
-// Expected minimal markup:
-// <main class="status-page status-page--404">
-//   <h1>404</h1>
-//   <p>Page not found.</p>
-// </main>
 // --------------------
 .status-page {
-  // Fallback for old browsers (no flex)
   width: content-width(sm);
   max-width: 100%;
   margin: 3rem auto;
@@ -125,22 +132,27 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(variate.$color-black, 0.06);
 
-  // Preferred layout
+  // Old browser fallback first
   min-height: calc(100vh - 6rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: block;
+
+  // Modern layout enhancement
+  @supports (display: flex) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
   @include up(md) {
     width: content-width(md);
-    padding: 2rem 2rem;
+    padding: 2rem;
   }
 
   @include up(lg) {
     width: content-width(lg);
     min-height: calc(100vh - 8rem);
     margin: 4rem auto;
-    padding: 2.5rem 2.5rem;
+    padding: 2.5rem;
   }
 
   @include up(xl) {
@@ -161,6 +173,7 @@ body {
     line-height: 1.2;
     letter-spacing: 0.01em;
     color: inherit;
+    word-break: break-word;
   }
 
   p {
@@ -168,45 +181,41 @@ body {
     font-size: clamp(1rem, 1.8vw, 1.125rem);
     color: $text-muted;
     max-width: 60ch;
+    overflow-wrap: anywhere;
   }
 }
 
 // --------------------
 // Status variants
-// Use one class to switch tone per page type
 // --------------------
 .status-page--404,
 .status-page--40x {
-  border-top: 6px solid variate.$color-orange;
+  border-top: 6px solid $status-border-40x;
 }
 
 .status-page--50x {
-  border-top: 6px solid variate.$color-red;
+  border-top: 6px solid $status-border-50x;
 }
 
 .status-page--offline {
-  border-top: 6px solid variate.$color-blue;
+  border-top: 6px solid $status-border-offline;
 }
 
 .status-page--maintenance {
-  border-top: 6px solid variate.$color-purple;
+  border-top: 6px solid $status-border-maintenance;
 }
 
-// Optional accent utility for h1 (if needed)
-.status-page--accent {
-  h1 {
-    color: $accent-default;
-  }
+.status-page--accent h1 {
+  color: $accent-default;
 }
 
 // --------------------
-// Dark mode (modern browsers)
-// Old browsers keep light mode above
+// Dark mode
 // --------------------
 @media (prefers-color-scheme: dark) {
   body {
     color: #e5e7eb;
-    background: #0f172a; // friendly dark navy-like
+    background: #0f172a;
   }
 
   .status-page {
@@ -221,19 +230,19 @@ body {
 
   .status-page--404,
   .status-page--40x {
-    border-top-color: #ffb357;
+    border-top-color: $status-border-dark-40x;
   }
 
   .status-page--50x {
-    border-top-color: #ff6b63;
+    border-top-color: $status-border-dark-50x;
   }
 
   .status-page--offline {
-    border-top-color: #66b3ff;
+    border-top-color: $status-border-dark-offline;
   }
 
   .status-page--maintenance {
-    border-top-color: #d58bf3;
+    border-top-color: $status-border-dark-maintenance;
   }
 }
 ```
