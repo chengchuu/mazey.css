@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "sass:meta";
 @use "../variate/index" as variate;
 
 // --------------------
@@ -21,18 +22,17 @@ $content-max-widths: (
 );
 
 // --------------------
-// Status border colors (defined in base.scss)
+// Status tokens (optimize repeated ".status-page--*")
+// Keep your HTML classes, generate CSS via a map + loop.
 // --------------------
-$status-border-40x: variate.$color-orange;
-$status-border-50x: variate.$color-red;
-$status-border-offline: variate.$color-blue;
-$status-border-maintenance: variate.$color-purple;
-
-// Dark mode status border colors
-$status-border-dark-40x: #ffb357;
-$status-border-dark-50x: #ff6b63;
-$status-border-dark-offline: #66b3ff;
-$status-border-dark-maintenance: #d58bf3;
+$status-themes: (
+  // name: (light, dark)
+  "404": (light: variate.$color-orange, dark: #ffb357),
+  "40x": (light: variate.$color-orange, dark: #ffb357),
+  "50x": (light: variate.$color-red, dark: #ff6b63),
+  "offline": (light: variate.$color-blue, dark: #66b3ff),
+  "maintenance": (light: variate.$color-purple, dark: #d58bf3)
+);
 
 // --------------------
 // Dark mode semantic colors (defined in base.scss)
@@ -58,6 +58,19 @@ $dark-card-shadow: 0 8px 30px rgba(variate.$color-black, 0.45);
 @mixin up($name) {
   @media (min-width: bp($name)) {
     @content;
+  }
+}
+
+// Generate ".status-page--{key}" selectors from $status-themes
+@mixin status-accent-borders($variant: light) {
+  @if ($variant != light and $variant != dark) {
+    @error "status-accent-borders(): $variant must be 'light' or 'dark'.";
+  }
+
+  @each $name, $theme in $status-themes {
+    .status-page--#{$name} {
+      border-top-color: map.get($theme, $variant);
+    }
   }
 }
 
@@ -150,24 +163,14 @@ body {
 }
 
 // --------------------
-// Status variants
+// Status variants (light)
+// Only define the border style once, only swap the color per variant.
 // --------------------
-.status-page--404,
-.status-page--40x {
-  border-top: 6px solid $status-border-40x;
+.status-page {
+  border-top: 6px solid transparent;
 }
 
-.status-page--50x {
-  border-top: 6px solid $status-border-50x;
-}
-
-.status-page--offline {
-  border-top: 6px solid $status-border-offline;
-}
-
-.status-page--maintenance {
-  border-top: 6px solid $status-border-maintenance;
-}
+@include status-accent-borders(light);
 
 .status-page--accent h1 {
   color: $accent-default;
@@ -192,20 +195,5 @@ body {
     }
   }
 
-  .status-page--404,
-  .status-page--40x {
-    border-top-color: $status-border-dark-40x;
-  }
-
-  .status-page--50x {
-    border-top-color: $status-border-dark-50x;
-  }
-
-  .status-page--offline {
-    border-top-color: $status-border-dark-offline;
-  }
-
-  .status-page--maintenance {
-    border-top-color: $status-border-dark-maintenance;
-  }
+  @include status-accent-borders(dark);
 }
