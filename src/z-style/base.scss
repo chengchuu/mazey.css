@@ -36,8 +36,8 @@ $content-max-widths: (
 // Status tokens
 // --------------------
 $status-themes: (
-  "40x": (light: variate.$color-orange, dark: function.dark-color(variate.$color-orange)),
-  "50x": (light: variate.$color-red, dark: function.dark-color(variate.$color-red)),
+  "not-found": (light: variate.$color-orange, dark: function.dark-color(variate.$color-orange)),
+  "server-error": (light: variate.$color-red, dark: function.dark-color(variate.$color-red)),
   "offline": (light: variate.$color-blue, dark: function.dark-color(variate.$color-blue)),
   "maintenance": (light: variate.$color-purple, dark: function.dark-color(variate.$color-purple))
 );
