@@ -36,10 +36,10 @@ $content-max-widths: (
 // Status tokens
 // --------------------
 $status-themes: (
-  "not-found": (light: variate.$color-orange, dark: function.dark-color(variate.$color-orange)),
-  "server-error": (light: variate.$color-red, dark: function.dark-color(variate.$color-red)),
-  "offline": (light: variate.$color-blue, dark: function.dark-color(variate.$color-blue)),
-  "maintenance": (light: variate.$color-purple, dark: function.dark-color(variate.$color-purple))
+  "warn": (light: variate.$color-orange, dark: function.dark-color(variate.$color-orange)),
+  "error": (light: variate.$color-red, dark: function.dark-color(variate.$color-red)),
+  "info": (light: variate.$color-blue, dark: function.dark-color(variate.$color-blue)),
+  "purple": (light: variate.$color-purple, dark: function.dark-color(variate.$color-purple))
 );
 
 // --------------------
