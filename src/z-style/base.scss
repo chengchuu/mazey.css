@@ -1,6 +1,7 @@
 @use "sass:map";
 @use "sass:meta";
 @use "../variate/index" as variate;
+@use "../function/index" as function;
 
 // --------------------
 // Semantic defaults
@@ -11,6 +12,16 @@ $text-default: #1f2937;
 $text-muted: #4b5563;
 $card-default: #ffffff;
 $accent-default: variate.$color-blue;
+
+// --------------------
+// Dark mode semantic colors
+// --------------------
+$dark-text-default: function.dark-color($text-default);
+$dark-body-bg: #0f172a;
+$dark-card-bg: #111827;
+$dark-text-muted: function.dark-color($text-muted);
+$dark-card-border: rgba(variate.$color-white, 0.12);
+$dark-card-shadow: 0 8px 30px rgba(variate.$color-black, 0.45);
 
 // Width control for responsive behavior
 $content-max-widths: (
@@ -25,22 +36,11 @@ $content-max-widths: (
 // Status tokens
 // --------------------
 $status-themes: (
-  "404": (light: variate.$color-orange, dark: #ffb357),
-  "40x": (light: variate.$color-orange, dark: #ffb357),
-  "50x": (light: variate.$color-red, dark: #ff6b63),
-  "offline": (light: variate.$color-blue, dark: #66b3ff),
-  "maintenance": (light: variate.$color-purple, dark: #d58bf3)
+  "40x": (light: variate.$color-orange, dark: function.dark-color(variate.$color-orange)),
+  "50x": (light: variate.$color-red, dark: function.dark-color(variate.$color-red)),
+  "offline": (light: variate.$color-blue, dark: function.dark-color(variate.$color-blue)),
+  "maintenance": (light: variate.$color-purple, dark: function.dark-color(variate.$color-purple))
 );
-
-// --------------------
-// Dark mode semantic colors
-// --------------------
-$dark-text-default: #e5e7eb;
-$dark-body-bg: #0f172a;
-$dark-card-bg: #111827;
-$dark-text-muted: #cbd5e1;
-$dark-card-border: rgba(variate.$color-white, 0.12);
-$dark-card-shadow: 0 8px 30px rgba(variate.$color-black, 0.45);
 
 // --------------------
 // Helpers
@@ -66,7 +66,7 @@ $dark-card-shadow: 0 8px 30px rgba(variate.$color-black, 0.45);
   }
 
   @each $name, $theme in $status-themes {
-    .status-page--#{$name} {
+    .status-page-#{$name} {
       border-color: map.get($theme, $variant);
     }
   }
@@ -160,7 +160,7 @@ body {
 
 @include status-borders(light);
 
-.status-page--accent h1 {
+.status-page-accent h1 {
   color: $accent-default;
 }
 
