@@ -8,17 +8,17 @@
 // --------------------
 $font-stack: 'PingFang SC', 'Microsoft YaHei', 'Droid Sans Fallback', SimHei, Arial, Helvetica, tahoma, sans-serif;
 $bg-default: #f6f8fb;
-$text-default: #1f2937;
+$text-default: variate.$color-black;
 $text-muted: #4b5563;
-$card-default: #ffffff;
+$card-default: variate.$color-white;
 $accent-default: variate.$color-blue;
 
 // --------------------
 // Dark mode semantic colors
 // --------------------
 $dark-text-default: function.dark-color($text-default);
-$dark-body-bg: #0f172a;
-$dark-card-bg: #111827;
+$dark-body-bg: function.dark-color($bg-default);
+$dark-card-bg: function.dark-color($card-default);
 $dark-text-muted: function.dark-color($text-muted);
 $dark-card-border: rgba(variate.$color-white, 0.12);
 $dark-card-shadow: 0 8px 30px rgba(variate.$color-black, 0.45);
@@ -103,7 +103,7 @@ body {
   box-sizing: border-box;
 
   background: $card-default;
-  border: 2px solid rgba(variate.$color-black, 0.12); // <-- main border style
+  border: 2px solid rgba(variate.$color-black, 0.12);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(variate.$color-black, 0.06);
 
