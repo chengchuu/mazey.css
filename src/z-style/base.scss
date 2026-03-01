@@ -22,11 +22,9 @@ $content-max-widths: (
 );
 
 // --------------------
-// Status tokens (optimize repeated ".status-page--*")
-// Keep your HTML classes, generate CSS via a map + loop.
+// Status tokens
 // --------------------
 $status-themes: (
-  // name: (light, dark)
   "404": (light: variate.$color-orange, dark: #ffb357),
   "40x": (light: variate.$color-orange, dark: #ffb357),
   "50x": (light: variate.$color-red, dark: #ff6b63),
@@ -35,7 +33,7 @@ $status-themes: (
 );
 
 // --------------------
-// Dark mode semantic colors (defined in base.scss)
+// Dark mode semantic colors
 // --------------------
 $dark-text-default: #e5e7eb;
 $dark-body-bg: #0f172a;
@@ -61,15 +59,15 @@ $dark-card-shadow: 0 8px 30px rgba(variate.$color-black, 0.45);
   }
 }
 
-// Generate ".status-page--{key}" selectors from $status-themes
-@mixin status-accent-borders($variant: light) {
+// Full border version (instead of top border only)
+@mixin status-borders($variant: light) {
   @if ($variant != light and $variant != dark) {
-    @error "status-accent-borders(): $variant must be 'light' or 'dark'.";
+    @error "status-borders(): $variant must be 'light' or 'dark'.";
   }
 
   @each $name, $theme in $status-themes {
     .status-page--#{$name} {
-      border-top-color: map.get($theme, $variant);
+      border-color: map.get($theme, $variant);
     }
   }
 }
@@ -105,15 +103,13 @@ body {
   box-sizing: border-box;
 
   background: $card-default;
-  border: 1px solid rgba(variate.$color-black, 0.08);
+  border: 2px solid rgba(variate.$color-black, 0.12); // <-- main border style
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(variate.$color-black, 0.06);
 
-  // Old browser fallback first
   min-height: calc(100vh - 6rem);
   display: block;
 
-  // Modern layout enhancement
   @supports (display: flex) {
     display: flex;
     flex-direction: column;
@@ -162,15 +158,7 @@ body {
   }
 }
 
-// --------------------
-// Status variants (light)
-// Only define the border style once, only swap the color per variant.
-// --------------------
-.status-page {
-  border-top: 6px solid transparent;
-}
-
-@include status-accent-borders(light);
+@include status-borders(light);
 
 .status-page--accent h1 {
   color: $accent-default;
@@ -195,5 +183,5 @@ body {
     }
   }
 
-  @include status-accent-borders(dark);
+  @include status-borders(dark);
 }
