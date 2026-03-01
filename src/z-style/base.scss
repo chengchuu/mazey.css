@@ -66,7 +66,7 @@ $status-themes: (
   }
 
   @each $name, $theme in $status-themes {
-    .status-page-#{$name} {
+    .base-#{$name} {
       border-color: map.get($theme, $variant);
     }
   }
@@ -95,7 +95,7 @@ body {
 // --------------------
 // Main layout
 // --------------------
-.status-page {
+.base {
   width: content-width(sm);
   max-width: 100%;
   margin: 3rem auto;
@@ -160,7 +160,7 @@ body {
 
 @include status-borders(light);
 
-.status-page-accent h1 {
+.base-accent h1 {
   color: $accent-default;
 }
 
@@ -173,7 +173,7 @@ body {
     background: $dark-body-bg;
   }
 
-  .status-page {
+  .base {
     background: $dark-card-bg;
     border-color: $dark-card-border;
     box-shadow: $dark-card-shadow;
