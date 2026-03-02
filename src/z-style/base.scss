@@ -21,7 +21,6 @@ $dark-body-bg: function.dark-color($bg-default);
 $dark-card-bg: function.dark-color($card-default);
 $dark-text-muted: function.dark-color($text-muted);
 $dark-card-border: rgba(variate.$color-white, 0.12);
-$dark-card-shadow: 0 8px 30px rgba(variate.$color-black, 0.45);
 
 // Width control for responsive behavior
 $content-max-widths: (
@@ -36,6 +35,7 @@ $content-max-widths: (
 // Status tokens
 // --------------------
 $status-themes: (
+  "success": (light: variate.$color-green, dark: function.dark-color(variate.$color-green)),
   "warn": (light: variate.$color-orange, dark: function.dark-color(variate.$color-orange)),
   "error": (light: variate.$color-red, dark: function.dark-color(variate.$color-red)),
   "info": (light: variate.$color-blue, dark: function.dark-color(variate.$color-blue)),
@@ -176,7 +176,7 @@ body {
   .base {
     background: $dark-card-bg;
     border-color: $dark-card-border;
-    box-shadow: $dark-card-shadow;
+    box-shadow: none;
 
     p {
       color: $dark-text-muted;
