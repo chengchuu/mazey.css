@@ -2,9 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { genCustomConsole } = require('mazey');
 
+const wpCon = genCustomConsole('[webpack]')
 const ENTRY = process.env.ENTRY || 'unknown';
-console.log(`ENTRY: ${ENTRY}`);
+wpCon.log(`ENTRY: ${ENTRY}`);
 
 module.exports = {
   mode: 'production',
@@ -14,6 +16,10 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'lib'),
+  },
+  watchOptions: {
+    ignored: /node_modules/,
+    aggregateTimeout: 300,
   },
   module: {
     rules: [

@@ -1,0 +1,230 @@
+@charset "utf-8";
+@use "sass:map";
+@use "../variate/index" as variate;
+@use "../function/index" as function;
+@use "../mixin/theme";
+@use "link-normalize";
+
+// Variates
+// The parent element is a container with a font size of 16px
+$TinyBoxLen: 16;
+$TinyBoxSize: $TinyBoxLen + px;
+$TinyPadding: function.pxToEm(20);
+$TinyPaddingSmall: function.pxToEm(8);
+$TinyWidthSmall: map.get(variate.$grid-breakpoints, sm);
+// Color
+$theme-light: (
+  lk-pri: #1890ff,
+  lk-sub: #40a9ff,
+  lk-bg: #eeeeee,
+  lk-input-bg: variate.$color-white,
+  lk-text: variate.$color-black,
+  lk-text-sub: rgba(0, 0, 0, 0.85),
+  lk-btn-text: variate.$color-white,
+  lk-border: #d9d9d9,
+  lk-border-sub: #f0f0f0,
+  lk-success: variate.$color-green,
+  lk-bgc-silver: variate.$bgc-silver,
+);
+$theme-dark: (
+  lk-pri: function.dark-color(#1890ff),
+  lk-sub: function.dark-color(#40a9ff),
+  lk-bg: function.dark-color(#eeeeee),
+  lk-input-bg: function.dark-color(variate.$color-white),
+  lk-text: function.dark-color(variate.$color-black),
+  lk-text-sub: function.dark-color(variate.$color-black),
+  lk-btn-text: function.dark-color(variate.$color-white),
+  lk-border: function.dark-color(#d9d9d9),
+  lk-border-sub: function.dark-color(#f0f0f0),
+  lk-success: function.dark-color(variate.$color-green),
+  lk-bgc-silver: function.dark-color(variate.$bgc-silver),
+);
+
+:root {
+  @include theme.theme-vars($theme-light);
+}
+
+[data-theme="dark"] {
+  @include theme.theme-vars($theme-dark);
+}
+
+.tiny-box {
+  color: var(--color-lk-text);
+  background-color: var(--color-lk-bg);
+  width: 100%;
+  font-weight: 400;
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Droid Sans Fallback', Arial, Helvetica, tahoma, sans-serif;
+  font-size: $TinyBoxSize;
+  box-sizing: border-box;
+  padding: $TinyPadding;
+
+  div, input {
+    box-sizing: border-box;
+  }
+
+  input, button, a, span {
+    font-size: function.pxToEm(16);
+    line-height: 1.5;
+  }
+
+  button {
+    color: var(--color-lk-btn-text);
+    background-color: var(--color-lk-pri);
+    border-color: var(--color-lk-pri);
+    font-weight: 400;
+    text-align: center;
+    box-shadow: 0 function.pxToEm(2) 0 rgba(0, 0, 0, 0.045);
+    text-shadow: 0 function.pxToEm(-1) 0 rgba(0, 0, 0, 0.12);
+    outline: 0;
+    border: function.pxToEm(1) solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: function.pxToEm(3) function.pxToEm(15);
+    border-radius: function.pxToEm(2);
+    user-select: none;
+
+    &:hover {
+      background-color: var(--color-lk-sub);
+      border-color: var(--color-lk-sub);
+    }
+  }
+
+  input {
+    color: var(--color-lk-text-sub);
+    background-color: var(--color-lk-input-bg);
+    border-color: var(--color-lk-border);
+    margin: 0;
+    font-variant: tabular-nums;
+    list-style: none;
+    padding: function.pxToEm(4) function.pxToEm(11);
+    background-image: none;
+    border-width: function.pxToEm(1);
+    border-style: solid;
+    border-radius: function.pxToEm(2);
+    transition: all 0.3s;
+    min-width: function.pxToEm(200 * 1.12);
+    width: function.pxToEm(200 * 1.12);
+
+    &:focus {
+      border-color: var(--color-lk-sub);
+      outline: 0;
+      box-shadow: 0 0 0 function.pxToEm(2) rgba(24, 144, 255, 0.2);
+    }
+  }
+
+  .generate {
+    display: flex;
+    justify-content: space-between;
+
+    >input {
+      margin-right: function.pxToEm(16);
+      flex: 1 0 auto;
+    }
+  }
+
+  .result-show {
+    color: var(--color-lk-text-sub);
+    background-color: var(--color-lk-input-bg);
+    border-color: var(--color-lk-border-sub);
+    padding: function.pxToEm(24) function.pxToEm(24) function.pxToEm(12) function.pxToEm(24);
+    border-radius: function.pxToEm(2);
+    border-width: function.pxToEm(1);
+    border-style: solid;
+    margin-top: $TinyPadding;
+    display: flex;
+    flex-wrap: wrap;
+
+    .copied {
+      color: var(--color-lk-success);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .placeholder {
+      font-size: function.pxToEm(14);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    a, input, button, span {
+      margin-right: function.pxToEm(10);
+      margin-bottom: function.pxToEm(12);
+    }
+  }
+
+  .generated-result {
+    @extend .result-show;
+
+    margin-top: $TinyPaddingSmall;
+    align-items: center;
+    padding-bottom: function.pxToEm(24);
+
+    span, a {
+      margin: 0;
+      display: flex;
+      justify-items: center;
+      font-size: function.pxToEm(14);
+    }
+
+    a {
+      color: var(--color-lk-text);
+      text-decoration: underline;
+    }
+
+    &.is-backup {
+      span {
+        font-size: function.pxToEm(13);
+      }
+
+      a {
+        margin-right: function.pxToEm(8);
+      }
+
+      button {
+        color: var(--color-lk-text);
+        background-color: var(--color-lk-bgc-silver);
+        border-color: var(--color-lk-bgc-silver);
+        margin: 0;
+        padding: function.pxToEm(0) function.pxToEm(5);
+        margin-right: function.pxToEm(8);
+        font-size: function.pxToEm(12);
+
+        &:hover {
+          background-color: var(--color-lk-bgc-silver);
+          border-color: var(--color-lk-bgc-silver);
+        }
+      }
+
+      .copied {
+        font-size: function.pxToEm(12);
+      }
+    }
+
+    &.is-qr {
+      padding: 0;
+
+      .qr-code {
+        display: flex;
+      }
+
+      canvas {
+        margin: function.pxToEm(12) function.pxToEm(12) function.pxToEm(12) function.pxToEm(18);
+      }
+    }
+  }
+
+  // Use Medium Query
+  @media (max-width: $TinyWidthSmall) {
+    $smallPercent: 0.6;
+
+    padding: calc($TinyPadding * $smallPercent);
+
+    .result-show {
+      margin-top: calc($TinyPadding * $smallPercent);
+    }
+
+    .generated-result {
+      margin-top: calc($TinyPaddingSmall * $smallPercent);
+    }
+  }
+}
