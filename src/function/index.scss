@@ -1,0 +1,59 @@
+@function dark-color($color, $type: 'default') {
+  $h1: hue($color);
+  $s1: saturation($color);
+  $l1: lightness($color);
+  $h2: $h1;
+  $s2: $s1;
+  $l2: $l1;
+
+  // Evaluate HSL values and perform conversion
+  @if ($s1 > 0) {
+    // When saturation > 0, reduce lightness (L) by 5% and saturation (S) by 20%
+    $h2: $h1;
+    $s2: $s1 * 0.8;
+    $l2: $l1 * 0.95;
+
+    @if ($l1 > 79) {
+      // For bright colors: L' = (100 - L) + 0.1, reduce saturation (S) by 80%
+      $h2: $h1;
+      $s2: $s1 * 0.2;
+      $l2: $l1 * -0.9 + 100;
+    }
+
+    @if ($l1 < 25) {
+      // For dark colors: L' = (100 - L) + 0.1, reduce saturation (S) by 20%
+      $h2: $h1;
+      $s2: $s1 * 0.8;
+      $l2: $l1 * -0.9 + 100;
+    }
+  }
+
+  // When saturation is 0 (Grayscale)
+  @if ($s1 <= 0) {
+    $h2: $h1;
+    $s2: $s1;
+
+    @if($l1 > 95 and $type == 'gray') {
+      $h2: $h1;
+      $s2: $s1;
+      $l2: 8 - (100 - $l1) * 1.6;
+    } @else {
+      $h2: $h1;
+      $s2: $s1;
+      $l2: $l1 * -0.92 + 100;
+    }
+  }
+
+  // Handle pure white
+  @if ($l1 == 100%) {
+    $h2: $h1;
+    $s2: $s1;
+    $l2: 8%;
+  }
+
+  @return hsl($h2, $s2, $l2);
+}
+
+@function pxToEm($px, $base: 16) {
+  @return calc($px / $base) * 1em;
+}

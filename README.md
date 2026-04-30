@@ -1,3 +1,4 @@
+<!-- omit from toc -->
 # mazey.css
 
 [![npm version][npm-image]][npm-url]
@@ -7,6 +8,17 @@
 [npm-url]: https://npmjs.org/package/mazey.css
 [l-image]: https://img.shields.io/npm/l/mazey.css
 [l-url]: https://github.com/chengchuu/mazey.css
+
+- [Install](#install)
+- [Basic Usage](#basic-usage)
+- [webpack Configuration](#webpack-configuration)
+- [Vue CLI Configuration](#vue-cli-configuration)
+  - [Confluence](#confluence)
+- [Contributing](#contributing)
+  - [Development Setup](#development-setup)
+  - [Development Environment](#development-environment)
+  - [Operation Steps](#operation-steps)
+- [License](#license)
 
 ## Install
 
@@ -83,12 +95,6 @@ module.exports = defineConfig({
 }
 ```
 
-## Deploy
-
-```bash
-git clone https://github.com/chengchuu/mazey.css.git style
-```
-
 ### Confluence
 
 Confluence is a popular document tool for companies. But the support for Markdown is inferior. For example, it can't display the style of the table and code. Therefore, the project will supply the effect of it.
@@ -99,13 +105,23 @@ Confluence is a popular document tool for companies. But the support for Markdow
 
 ## Contributing
 
+### Development Setup
+
+```bash
+docker compose up -d --build
+
+docker compose up -d
+
+docker compose down
+```
+
 ### Development Environment
 
 | Dependency | Version  |
 |------------|----------|
 | Node.js    | v14.21.3 |
 
-### Steps
+### Operation Steps
 
 1. Create a new JavaScript file in the `z-temporary` folder, such as `z-temporary/<name>.js`.
 2. Create a new SCSS file in the `src/z-style` folder, such as `src/z-style/_<name>.scss`.

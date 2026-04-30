@@ -1,4 +1,7 @@
 {
   "window.title": "${rootName}${separator}${dirty}${activeEditorShort}${separator}${profileName}${separator}${appName}",
-  "liveServer.settings.port": 5514
+  "liveServer.settings.port": 5514,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true
 }

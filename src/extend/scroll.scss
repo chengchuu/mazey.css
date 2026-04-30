@@ -1,3 +1,5 @@
+@use "sass:color";
+
 %m-scroll-bar {
   overflow-y: auto;
 
@@ -16,7 +18,7 @@
 
   /* 滑块颜色 */
   &::-webkit-scrollbar-thumb {
-    background-color: darken(#EEEEEE, 10%);
+    background-color: color.adjust(#EEEEEE, $lightness: -10%);
     -webkit-border-radius: 2em;
     -moz-border-radius: 2em;
     border-radius: 2em;
