@@ -1,0 +1,187 @@
+@use "sass:map";
+@use "sass:meta";
+@use "../variate/index" as variate;
+@use "../function/index" as function;
+
+// --------------------
+// Semantic defaults
+// --------------------
+$font-stack: 'PingFang SC', 'Microsoft YaHei', 'Droid Sans Fallback', SimHei, Arial, Helvetica, tahoma, sans-serif;
+$bg-default: #f6f8fb;
+$text-default: variate.$color-black;
+$text-muted: #4b5563;
+$card-default: variate.$color-white;
+$accent-default: variate.$color-blue;
+
+// --------------------
+// Dark mode semantic colors
+// --------------------
+$dark-text-default: function.dark-color($text-default);
+$dark-body-bg: function.dark-color($bg-default);
+$dark-card-bg: function.dark-color($card-default);
+$dark-text-muted: function.dark-color($text-muted);
+$dark-card-border: rgba(variate.$color-white, 0.12);
+
+// Width control for responsive behavior
+$content-max-widths: (
+  sm: 92%,
+  md: 86%,
+  lg: 760px,
+  xl: 840px,
+  xxl: 920px
+);
+
+// --------------------
+// Status tokens
+// --------------------
+$status-themes: (
+  "success": (light: variate.$color-green, dark: function.dark-color(variate.$color-green)),
+  "warn": (light: variate.$color-orange, dark: function.dark-color(variate.$color-orange)),
+  "error": (light: variate.$color-red, dark: function.dark-color(variate.$color-red)),
+  "info": (light: variate.$color-blue, dark: function.dark-color(variate.$color-blue)),
+  "purple": (light: variate.$color-purple, dark: function.dark-color(variate.$color-purple))
+);
+
+// --------------------
+// Helpers
+// --------------------
+@function bp($name) {
+  @return map.get(variate.$grid-breakpoints, $name);
+}
+
+@function content-width($name) {
+  @return map.get($content-max-widths, $name);
+}
+
+@mixin up($name) {
+  @media (min-width: bp($name)) {
+    @content;
+  }
+}
+
+// Full border version (instead of top border only)
+@mixin status-borders($variant: light) {
+  @if ($variant != light and $variant != dark) {
+    @error "status-borders(): $variant must be 'light' or 'dark'.";
+  }
+
+  @each $name, $theme in $status-themes {
+    .base-#{$name} {
+      border-color: map.get($theme, $variant);
+    }
+  }
+}
+
+// --------------------
+// Base reset-ish styles
+// --------------------
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: $font-stack;
+  line-height: 1.5;
+  color: $text-default;
+  background: $bg-default;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+// --------------------
+// Main layout
+// --------------------
+.base {
+  width: content-width(sm);
+  max-width: 100%;
+  margin: 3rem auto;
+  padding: 1.5rem 1.25rem;
+  box-sizing: border-box;
+
+  background: $card-default;
+  border: 2px solid rgba(variate.$color-black, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(variate.$color-black, 0.06);
+
+  min-height: calc(100vh - 6rem);
+  display: block;
+
+  @supports (display: flex) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @include up(md) {
+    width: content-width(md);
+    padding: 2rem;
+  }
+
+  @include up(lg) {
+    width: content-width(lg);
+    min-height: calc(100vh - 8rem);
+    margin: 4rem auto;
+    padding: 2.5rem;
+  }
+
+  @include up(xl) {
+    width: content-width(xl);
+  }
+
+  @include up(xxl) {
+    width: content-width(xxl);
+  }
+
+  h1,
+  p {
+    margin: 0;
+  }
+
+  h1 {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: inherit;
+    word-break: break-word;
+  }
+
+  p {
+    margin-top: 0.75rem;
+    font-size: clamp(1rem, 1.8vw, 1.125rem);
+    color: $text-muted;
+    max-width: 60ch;
+    overflow-wrap: anywhere;
+  }
+}
+
+@include status-borders(light);
+
+.base-accent h1 {
+  color: $accent-default;
+}
+
+// --------------------
+// Dark mode
+// --------------------
+@media (prefers-color-scheme: dark) {
+  body {
+    color: $dark-text-default;
+    background: $dark-body-bg;
+  }
+
+  .base {
+    background: $dark-card-bg;
+    border-color: $dark-card-border;
+    box-shadow: none;
+
+    p {
+      color: $dark-text-muted;
+    }
+  }
+
+  @include status-borders(dark);
+}

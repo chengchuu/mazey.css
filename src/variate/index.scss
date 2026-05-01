@@ -27,12 +27,6 @@ $bgc-gray: #AAAAAA;
 $bgc-silver: #DDDDDD;
 $bgc-black: #111111;
 
-// Card Colors
-$card-red: #C42412;
-$card-yellow: #FED440;
-$card-green: #34C759;
-$card-orange: #DA4E30;
-
 // Breakpoints
 $grid-breakpoints: (
   xs: 0,
@@ -42,3 +36,9 @@ $grid-breakpoints: (
   xl: 1200px,
   xxl: 1400px
 );
+
+// Card Colors
+$card-red: #C42412;
+$card-yellow: #FED440;
+$card-green: #34C759;
+$card-orange: #DA4E30;
