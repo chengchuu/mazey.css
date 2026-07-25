@@ -1,0 +1,25 @@
+@use "../function/index" as function;
+@use "../mixin/theme";
+
+$color-content: #626262;
+$color-white: #ffffff;
+$theme-light: (
+  bgbs-content: $color-content,
+  bgbs-white: $color-white,
+);
+$theme-dark: (
+  bgbs-content: function.dark-color($color-content),
+  bgbs-white: function.dark-color($color-white),
+);
+
+:root {
+  @include theme.theme-vars($theme-light);
+}
+[data-theme="dark"] {
+  @include theme.theme-vars($theme-dark);
+}
+
+body {
+  color: var(--color-bgbs-content);
+  background: var(--color-bgbs-white);
+}

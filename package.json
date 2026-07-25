@@ -4,12 +4,13 @@
   "description": "Mazey Style",
   "main": "lib/index.css",
   "scripts": {
-    "nvm:22": "nvm use 22",
+    "nvm:use": "nvm use 22",
     "build:index": "cross-env ENTRY=index webpack --config webpack.config.js",
     "build:confluence": "cross-env ENTRY=confluence webpack --config webpack.config.js",
     "build:link": "cross-env ENTRY=link webpack --config webpack.config.js",
     "watch:link": "cross-env ENTRY=link webpack --config webpack.config.js --watch",
     "build:base": "cross-env ENTRY=base webpack --config webpack.config.js",
+    "build:blogbase": "cross-env ENTRY=blogbase webpack",
     "test": "echo 'Ready to write and run tests?' && exit 0",
     "build": "echo 'Building project...' && exit 0"
   },
