@@ -1,0 +1,36 @@
+@use "../function/index" as function;
+@use "../mixin/theme";
+
+$color-content: #626262;
+$color-white: #ffffff;
+$bgc-nav: rgba(255, 255, 255, 0.7);
+$bgc-form: #ebebeb;
+$theme-light: (
+  bgbs-content: $color-content,
+  bgbs-white: $color-white,
+  bgbs-nav: $bgc-nav,
+  bgbs-form: $bgc-form,
+);
+$theme-dark: (
+  bgbs-content: function.dark-color($color-content),
+  bgbs-white: function.dark-color($color-white),
+  bgbs-nav: function.dark-color($bgc-nav),
+  bgbs-form: function.dark-color($bgc-form),
+);
+
+:root {
+  @include theme.theme-vars($theme-light);
+}
+[data-theme="dark"] {
+  @include theme.theme-vars($theme-dark);
+}
+
+body {
+  color: var(--color-bgbs-content);
+  background: var(--color-bgbs-white);
+}
+
+.site-header {
+  background: var(--color-bgbs-nav);
+  border-bottom: 1px solid var(--color-bgbs-form);
+}
