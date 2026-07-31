@@ -1,6 +1,6 @@
 {
   "name": "mazey.css",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "Mazey Style",
   "main": "lib/index.css",
   "scripts": {
@@ -41,7 +41,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
-    "mazey": "^4.10.0",
+    "mazey": "^5.6.2",
     "mini-css-extract-plugin": "^2.6.1",
     "sass": "^1.58.3",
     "sass-loader": "^13.3.3",
