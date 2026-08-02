@@ -9,6 +9,11 @@ temp/
 examples/
 images/
 scripts/
+site/
+project.config.js
+webpack.site.config.js
+eslint.config.mjs
+test/
 
 # .
 .idea
@@ -33,7 +38,7 @@ scripts/
 # Files
 yarn.lock
 yarn-error.log
-package-lock.json
+pnpm-lock.yaml
 api-extractor.json
 commitlint.config.js
 rollup.config.js

@@ -2,87 +2,118 @@
 
 ## Project scope
 
-`mazey.css` is a Sass/CSS package whose primary contract is its compiled stylesheets. Webpack
-compiles selected Sass entry points into committed artifacts under `lib/`; the `confluence` target
-also publishes a small JavaScript enhancement. Keep changes local to the affected bundle and
-preserve the published entry points.
+`mazey.css` is a CSS/Sass npm package. Its runtime contract is the compiled stylesheets under
+`lib/`; `lib/confluence.js` is the only current JavaScript package artifact. The public website is a
+separate Bootstrap/React build and must not add runtime dependencies or JavaScript exports to the
+package.
 
-Inspect `git status` before editing. Preserve unrelated work, and do not commit, tag, publish, or
-rewrite history unless the user explicitly asks.
+Inspect `git status` before editing. Preserve unrelated work, and do not commit, publish, deploy,
+tag, or rewrite history unless the user explicitly requests it.
 
 ## Repository map
 
-- `src/z-style/`: bundle-level Sass entries and their private supporting files. Current build
-  targets are `index.scss`, `base.scss`, `link.scss`, `confluence.scss`, and `blogbase.scss`.
-  `normalize.scss` and `link-normalize.scss` are composed into other entries.
-- `src/z-temporary/`: Webpack entry shims. Each supported target imports the matching file from
-  `src/z-style/`; `confluence.js` also contains the jQuery enhancement emitted to
-  `lib/confluence.js`.
-- `src/mixin/`, `src/extend/`, `src/function/`, and `src/variate/`: shared Sass modules. Internal
-  composition uses `@use`.
-- `src/z-template/index.html`: development HTML template emitted for each Webpack entry. Generated
-  `lib/*.html` files are ignored.
-- `webpack.config.js`: dynamic production build selected by the `ENTRY` environment variable. It
-  emits `lib/<entry>.css`, `lib/<entry>.js`, and `lib/<entry>.html`; ignored outputs must not be
-  treated as package artifacts.
-- `lib/`: committed release output. `index.css` is the package `main`; `base.css`, `blogbase.css`,
-  `confluence.css`, `link.css`, and `confluence.js` have current source entries. `404.css` and
-  `tiny.css` are tracked legacy artifacts without matching current build scripts.
-- `scripts/change-package-name.js`: temporarily scopes the package name for GitHub Packages.
-- `.github/workflows/publish-npm.yml`: installs with npm, runs the placeholder build and test
-  scripts, publishes to npm and GitHub Packages on release branches, restores changed metadata,
-  and creates the version tag.
+- `src/z-style/`: package stylesheet entries and private supporting styles. Current entries are
+  `index.scss`, `base.scss`, `blogbase.scss`, `link.scss`, and `confluence.scss`.
+- `src/z-temporary/`: package Webpack entry shims. `confluence.js` also emits the optional jQuery
+  enhancement.
+- `src/mixin/`, `src/extend/`, `src/function/`, and `src/variate/`: published Sass modules.
+- `webpack.config.js`: package stylesheet build selected by `ENTRY`; it emits committed `lib`
+  artifacts. Do not edit `lib` by hand.
+- `project.config.js`: central package, URL, route, SEO, theme, PWA, and stylesheet-reference data.
+- `site/`: homepage, API reference, shared theme/PWA behavior, CSS, and service-worker source.
+- `examples/`: React playground that previews generated public stylesheets in a sandboxed frame.
+- `webpack.site.config.js`: website and playground build. Development uses `/`; production uses
+  `/mazey.css/` and enables service-worker registration.
+- `scripts/build-pages.js`: deterministic `dist-dev` to `docs` assembly, manifest/crawler output,
+  public stylesheet copying, and service-worker token replacement.
+- `scripts/validate-package.js`, `validate-seo.js`, and `validate-pwa.js`: package and final-artifact
+  checks.
+- `test/`: deterministic Node tests for central configuration, route identity, dependency
+  boundaries, Mazey theme delegation, manifest data, and service-worker scope.
+- `images/`: favicon, logo, social preview, and PWA source images.
+- `lib/`, `dist-dev/`, `docs/`, and `coverage/`: generated output. Only `lib/` is committed.
 
-## Toolchain and environments
+## Package contract
 
-- `npm run nvm:use` selects Node.js 22 for local development. The README currently documents
-  Node.js v22.22.2.
-- The publish workflow currently uses Node.js 14. Do not assume its runtime matches local
-  development when changing dependencies or syntax.
-- The repository does not commit a dependency lockfile; both `package-lock.json` and
-  `pnpm-lock.yaml` are ignored. Use the existing npm workflow unless the task explicitly changes
-  package management.
-## Build and validation
+`package.json#main` is `lib/index.css`. Current generated stylesheet artifacts are `index.css`,
+`base.css`, `blogbase.css`, `link.css`, and `confluence.css`. `404.css` and `tiny.css` are tracked
+legacy files without current source/build entries; do not regenerate or delete them incidentally.
 
-Install dependencies with `npm install`. Build the affected entry explicitly:
+Keep entry names synchronized across `src/z-style`, `src/z-temporary`, package scripts,
+`project.config.js`, README usage, and `lib`. Preserve published selectors and Sass members unless a
+task explicitly changes them. Website-only dependencies belong in `devDependencies`; package
+validation rejects runtime dependencies.
 
-```bash
-npm run build:index
-npm run build:base
-npm run build:link
-npm run build:confluence
-npm run build:blogbase
+The package publishes `lib`, `src`, `README.md`, and `LICENSE`. Keep website sources, scripts,
+tests, images, and generated Pages output outside the npm tarball.
+
+## Website architecture
+
+Stable production routes are:
+
+```text
+https://chengchuu.github.io/mazey.css/
+https://chengchuu.github.io/mazey.css/playground/
+https://chengchuu.github.io/mazey.css/api/
 ```
 
-Use `npm run watch:link` only for continuous development of the `link` target.
+Webpack owns the website and React playground. The API route is a stylesheet reference generated
+from source HTML because this package has no TypeScript runtime API for TypeDoc to describe. Do not
+invent JavaScript symbols merely to produce API documentation.
 
-`npm run build` and `npm test` are placeholders that exit successfully without compiling bundles
-or running assertions. Do not use either command as evidence that a Sass change is valid. After a
-source change, run every affected `build:<entry>` command, inspect the corresponding tracked `lib/`
-diff, and check `git diff --check`. For package-boundary changes, also run `npm pack --dry-run` and
-confirm that the intended CSS and `confluence.js` artifacts are included.
+Browser modules receive the project-safe runtime subset through `__SITE_RUNTIME_CONFIG__`. Keep
+package identity, base paths, theme keys, worker paths, and stylesheet data in `project.config.js`
+rather than duplicating them in browser code.
+
+Theme controls must use Mazey's `resolveThemePreference`, `setThemePreference`, and
+`listenMediaQueryChanges`; keep only DOM application and current-session fallback local. PWA code
+uses Mazey's environment, standalone, and service-worker-update helpers. Service-worker registration
+is production-only, scoped to `/mazey.css/`, and requires an explicit user action before activating
+a waiting update.
+
+## Commands and validation
+
+Use Node.js 22 or later. `pnpm-lock.yaml` is the authoritative dependency lockfile; do not commit
+`package-lock.json`. GitHub workflows intentionally continue to use `npm install` to match their
+documented release policy.
+
+```bash
+pnpm install
+npm run typecheck
+npm run lint
+npm test
+npm run build
+npm run docs
+npm run seo:validate
+npm run pwa:validate
+npm run format:check
+npm pack --dry-run
+```
+
+`npm run build` rebuilds every current package entry and validates the package artifacts. Review
+the resulting tracked `lib` diff. `npm run docs` builds the production Pages site, replaces `docs`
+deterministically, and validates the final SEO/PWA artifact. Do not cite source-template inspection
+as final Pages validation.
+
+For package-boundary changes, inspect the `npm pack --dry-run` manifest. Tests and checks must not
+depend on network access. Do not run `npm publish`, Pages deployment, or the package-name mutation
+script during ordinary validation.
+
+## Workflows
+
+`.github/workflows/pages.yml` deploys Pages for pushes to `main` and `release/v*` with npm and no
+dependency cache. `.github/workflows/publish-npm.yml` publishes npm only for `release/v*` after the
+full preview pipeline. `main` must never publish npm. Preserve the Pages permissions and safe
+deployment concurrency defined in the workflow.
 
 ## Coding conventions
 
-- Use Sass modules with `@use` for new internal composition; preserve existing public selectors,
-  placeholders, variables, and bundle behavior unless the task changes that contract.
-- Keep filenames lowercase and hyphenated where needed, matching names such as
-  `link-normalize.scss`.
-- Keep an entry name synchronized across `src/z-temporary/<entry>.js`,
-  `src/z-style/<entry>.scss`, `package.json` scripts, and `lib/<entry>.css`.
-- Follow the surrounding file's formatting and selector nesting. Avoid broad formatting churn in
-  legacy Sass files.
-- Do not add real credentials, registry tokens, or generated `.npmrc` contents.
-
-## Generated output and change discipline
-
-- Do not edit `lib/` directly. Update Sass, entry JavaScript, templates, or Webpack configuration,
-  then rebuild the affected target.
-- Keep generated output and its source in the same change. Review emitted JavaScript carefully;
-  `.gitignore` intentionally tracks only `lib/confluence.js` among `lib/*.js` files.
-- Do not remove or regenerate legacy `404.css` or `tiny.css` unless the task establishes their
-  source and build path.
-- Avoid broad refactors for a single bundle. Add a real deterministic test before relying on
-  `npm test` for regression coverage.
-- Do not run publish steps or `scripts/change-package-name.js` unless the user explicitly requests
-  a release operation.
+- Use Sass modules with `@use` for internal composition.
+- Keep filenames lowercase and hyphenated where appropriate.
+- Use strict TypeScript for browser modules and named Mazey imports verified against the installed
+  version.
+- Keep custom website CSS small and Bootstrap-variable based.
+- Use semantic HTML, one `h1` per public page, meaningful links, labeled controls, and live regions
+  for async feedback.
+- Never add credentials, generated `.npmrc` tokens, unsupported compatibility claims, ratings, or
+  download figures.
