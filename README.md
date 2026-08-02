@@ -15,7 +15,6 @@
 - [Vue CLI Configuration](#vue-cli-configuration)
   - [Confluence](#confluence)
 - [Contributing](#contributing)
-  - [Development Setup](#development-setup)
   - [Development Environment](#development-environment)
   - [Operation Steps](#operation-steps)
 - [License](#license)
@@ -104,16 +103,6 @@ Confluence is a popular document tool for companies. But the support for Markdow
 ```
 
 ## Contributing
-
-### Development Setup
-
-```bash
-docker compose up -d --build
-
-docker compose up -d
-
-docker compose down
-```
 
 ### Development Environment
 
