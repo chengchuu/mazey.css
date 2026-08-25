@@ -5,6 +5,5 @@ lib/
 node_modules/
 package-lock.json
 pnpm-lock.yaml
-scripts/change-package-name.js
 src/
 webpack.config.js

@@ -65,8 +65,6 @@ does not require JavaScript.
 
 ## Development
 
-Use Node.js 22 or later and npm:
-
 ```bash
 pnpm install
 npm run typecheck
