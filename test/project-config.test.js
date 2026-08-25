@@ -1,5 +1,5 @@
 const assert = require("node:assert/strict");
-const { existsSync, readFileSync } = require("node:fs");
+const { readFileSync } = require("node:fs");
 const { spawnSync } = require("node:child_process");
 const path = require("node:path");
 const test = require("node:test");
@@ -77,6 +77,11 @@ test("the npm allowlist excludes generated website and package-build shims", () 
 
 test("pnpm is the only committed dependency lock format", () => {
   const root = path.resolve(__dirname, "..");
-  assert.equal(existsSync(path.join(root, "pnpm-lock.yaml")), true);
-  assert.equal(existsSync(path.join(root, "package-lock.json")), false);
+  const result = spawnSync(
+    "git",
+    ["ls-files", "--", "package-lock.json", "pnpm-lock.yaml"],
+    { cwd: root, encoding: "utf8" },
+  );
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(result.stdout.trim().split("\n"), ["pnpm-lock.yaml"]);
 });
