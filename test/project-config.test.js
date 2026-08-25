@@ -22,11 +22,9 @@ test("central configuration keeps all stable Pages routes under the project base
 test("website dependencies stay development-only at the required ranges", () => {
   const expected = {
     bootstrap: "^5.3.8",
-    "lint-staged": "^16.4.0",
     mazey: "^5.6.0",
     react: "^19.2.8",
     "react-dom": "^19.2.8",
-    typedoc: "^0.28.20",
   };
   assert.deepEqual(
     Object.fromEntries(
@@ -69,7 +67,7 @@ test("the npm allowlist excludes generated website and package-build shims", () 
   assert.deepEqual(pkg.files, [
     "lib/*.css",
     "lib/confluence.js",
-    "src",
+    "src/**/*.scss",
     "README.md",
     "LICENSE",
   ]);

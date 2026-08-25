@@ -7,6 +7,7 @@ const basePath = siteUrl.pathname.endsWith("/")
   : `${siteUrl.pathname}/`;
 const githubUrl = "https://github.com/chengchuu/mazey.css";
 const npmUrl = `https://www.npmjs.com/package/${pkg.name}`;
+const shortName = "mazey.css";
 const pages = {
   home: {
     title: "mazey.css - Reusable CSS and Sass Styles",
@@ -59,7 +60,7 @@ module.exports = deepFreeze({
     version: pkg.version,
     installCommand: `npm install ${pkg.name}`,
   },
-  brand: { displayName: pkg.name, shortName: "mazey.css" },
+  brand: { displayName: pkg.name, shortName },
   urls: {
     github: githubUrl,
     npm: npmUrl,
@@ -84,7 +85,7 @@ module.exports = deepFreeze({
   },
   pwa: {
     name: "mazey.css stylesheet reference",
-    shortName: "mazey.css",
+    shortName,
     description: pages.home.description,
     backgroundColor: theme.colorLight,
     themeColor: theme.colorPrimary,
