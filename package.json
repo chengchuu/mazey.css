@@ -55,9 +55,6 @@
     "url": "https://github.com/chengchuu/mazey.css/issues"
   },
   "homepage": "https://chengchuu.github.io/mazey.css/",
-  "engines": {
-    "node": ">=22"
-  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/react": "^19.2.17",
