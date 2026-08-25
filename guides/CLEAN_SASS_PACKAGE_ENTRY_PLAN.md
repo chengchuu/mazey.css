@@ -17,6 +17,10 @@ top-level `sass/` directory and make this the canonical consumer syntax:
 This is an intentional breaking change. Do not retain compatibility wrappers or aliases for
 `mazey.css/src/...` imports.
 
+This library will be published as a new npm package with no existing users or released versions.
+For frontend code, avoid defensive programming unless it protects a real UI, network, storage, or third-party boundary. Do not add broad `try...catch`, redundant optional chaining, fallback UI states, default objects, or guards around internal data that the component contract already guarantees.
+You are authorized to restructure the existing project, including changing its current file and directory organization, and to install, remove, or update npm packages when necessary to produce a cleaner, more maintainable, and production-ready implementation.
+
 ## Prerequisites
 
 Before editing, read these sources in order:
