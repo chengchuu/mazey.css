@@ -34,9 +34,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "nvm:use": "nvm use 22",
-    "dev:site": "webpack serve --mode development --config webpack.site.config.js",
     "dev": "webpack serve --mode development --config webpack.config.dev.js",
+    "dev:site": "webpack serve --mode development --config webpack.site.config.js",
     "build:index": "cross-env ENTRY=index webpack --config webpack.config.js",
     "build:confluence": "cross-env ENTRY=confluence webpack --config webpack.config.js",
     "build:link": "cross-env ENTRY=link webpack --config webpack.config.js",
