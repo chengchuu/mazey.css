@@ -2,6 +2,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const test = require("node:test");
+const sass = require("sass");
 
 const projectRoot = path.resolve(__dirname, "..");
 
@@ -71,6 +72,27 @@ test("only the Confluence entry contains library JavaScript", () => {
     "utf8",
   );
   assert.match(confluence, /if \(window\.\$\)/);
+});
+
+test("base layout preserves viewport fallbacks before dynamic sizing", () => {
+  const sourceCss = sass.compile(
+    path.join(projectRoot, "src/z-style/base.scss"),
+  ).css;
+  const artifactCss = fs.readFileSync(
+    path.join(projectRoot, "lib/base.css"),
+    "utf8",
+  );
+
+  for (const css of [sourceCss, artifactCss]) {
+    assert.match(
+      css,
+      /\.base\s*\{[^}]*min-height:\s*calc\(100vh - 6rem\);\s*min-height:\s*calc\(100dvh - 6rem\);[^}]*\}/,
+    );
+    assert.match(
+      css,
+      /@media\s*\(min-width:\s*992px\)\s*\{\s*\.base\s*\{[^}]*min-height:\s*calc\(100vh - 8rem\);\s*min-height:\s*calc\(100dvh - 8rem\);[^}]*\}/,
+    );
+  }
 });
 
 test("production single-entry filenames remain unchanged", () => {

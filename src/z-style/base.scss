@@ -108,6 +108,7 @@ body {
   box-shadow: 0 4px 20px rgba(variate.$color-black, 0.06);
 
   min-height: calc(100vh - 6rem);
+  min-height: calc(100dvh - 6rem);
   display: block;
 
   @supports (display: flex) {
@@ -124,6 +125,7 @@ body {
   @include up(lg) {
     width: content-width(lg);
     min-height: calc(100vh - 8rem);
+    min-height: calc(100dvh - 8rem);
     margin: 4rem auto;
     padding: 2.5rem;
   }
