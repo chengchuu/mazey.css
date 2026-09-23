@@ -90,7 +90,7 @@ test("base layout preserves viewport fallbacks before dynamic sizing", () => {
     );
     assert.match(
       css,
-      /@media\s*\(min-width:\s*992px\)\s*\{\s*\.base\s*\{[^}]*min-height:\s*calc\(100vh - 8rem\);\s*min-height:\s*calc\(100dvh - 8rem\);[^}]*\}/,
+      /@media\s*\((?:min-width:\s*992px|width\s*>=\s*992px)\)\s*\{\s*\.base\s*\{[^}]*min-height:\s*calc\(100vh - 8rem\);\s*min-height:\s*calc\(100dvh - 8rem\);[^}]*\}/,
     );
   }
 });

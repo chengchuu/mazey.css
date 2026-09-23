@@ -43,7 +43,7 @@ test("central configuration keeps all stable Pages routes under the project base
 test("website dependencies stay development-only at the required ranges", () => {
   const expected = {
     bootstrap: "^5.3.8",
-    mazey: "^5.9.0",
+    mazey: "^5.9.1",
     react: "^19.2.8",
     "react-dom": "^19.2.8",
   };
