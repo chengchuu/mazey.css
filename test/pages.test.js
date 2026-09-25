@@ -41,6 +41,9 @@ test("service-worker rendering replaces only project build tokens", () => {
   assert.match(rendered, /MAX_RUNTIME_CACHE_ENTRIES = 96/);
   assert.match(rendered, /isPackageStylesheet/);
   assert.match(rendered, /runtimeKeys/);
+  assert.match(rendered, /for \(const url of APP_SHELL\)/);
+  assert.match(rendered, /await cache\.put\(url, response\)/);
+  assert.doesNotMatch(rendered, /Promise\.all\(\s*APP_SHELL\.map/);
 });
 
 test("worker-source changes invalidate the Pages fingerprint", () => {

@@ -74,17 +74,13 @@ self.addEventListener("install", (event) => {
     (async () => {
       try {
         const cache = await caches.open(CACHE_NAME);
-        const responses = await Promise.all(
-          APP_SHELL.map((url) => fetch(url, { cache: "reload" })),
-        );
-        if (responses.some((response) => !cacheable(response))) {
-          throw new Error("A required app-shell response was not cacheable.");
+        for (const url of APP_SHELL) {
+          const response = await fetch(url, { cache: "reload" });
+          if (!cacheable(response)) {
+            throw new Error("A required app-shell response was not cacheable.");
+          }
+          await cache.put(url, response);
         }
-        await Promise.all(
-          responses.map((response, index) =>
-            cache.put(APP_SHELL[index], response),
-          ),
-        );
       } catch (error) {
         await caches.delete(CACHE_NAME).catch(() => undefined);
         throw error;
@@ -108,10 +104,6 @@ self.addEventListener("activate", (event) => {
       )
       .then(() => self.clients.claim()),
   );
-});
-
-self.addEventListener("message", (event) => {
-  if (event.data?.type === "SKIP_WAITING") self.skipWaiting();
 });
 
 self.addEventListener("fetch", (event) => {
