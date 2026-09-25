@@ -16,6 +16,17 @@ const sass = require("sass");
 const pkg = require("../package.json");
 const projectConfig = require("../project.config");
 
+test("development commands have explicit package and site scopes", () => {
+  assert.equal(
+    pkg.scripts["dev:site"],
+    "webpack serve --mode development --config webpack.site.config.js",
+  );
+  assert.equal(
+    pkg.scripts.dev,
+    "webpack serve --mode development --config webpack.config.dev.js",
+  );
+});
+
 test("central configuration keeps all stable Pages routes under the project base", () => {
   assert.equal(pkg.homepage, "https://chengchuu.github.io/mazey.css/");
   assert.equal(projectConfig.site.basePath, "/mazey.css/");
@@ -32,7 +43,7 @@ test("central configuration keeps all stable Pages routes under the project base
 test("website dependencies stay development-only at the required ranges", () => {
   const expected = {
     bootstrap: "^5.3.8",
-    mazey: "^5.9.0",
+    mazey: "^5.9.1",
     react: "^19.2.8",
     "react-dom": "^19.2.8",
   };
