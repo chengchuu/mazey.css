@@ -79,9 +79,8 @@ rather than duplicating them in browser code.
 
 Theme controls must use Mazey's `resolveThemePreference`, `setThemePreference`, and
 `listenMediaQueryChanges`; keep only DOM application and current-session fallback local. PWA code
-uses Mazey's environment, standalone, and service-worker-update helpers. Service-worker registration
-is production-only, scoped to `/mazey.css/`, and requires an explicit user action before activating
-a waiting update.
+uses Mazey's environment and standalone helpers. Service-worker registration is production-only,
+scoped to `/mazey.css/`, and updates activate through the browser's normal lifecycle.
 
 ## Commands and validation
 
