@@ -1,4 +1,4 @@
-const { existsSync, readFileSync } = require("node:fs");
+const { existsSync, readFileSync, readdirSync, statSync } = require("node:fs");
 const path = require("node:path");
 const projectConfig = require("../project.config");
 
@@ -16,6 +16,15 @@ const pngSize = (file) => {
   if (buffer.toString("ascii", 1, 4) !== "PNG") fail(`${file} is not a PNG`);
   return [buffer.readUInt32BE(16), buffer.readUInt32BE(20)];
 };
+const htmlFiles = (directory) =>
+  readdirSync(directory).flatMap((name) => {
+    const file = path.join(directory, name);
+    return statSync(file).isDirectory()
+      ? htmlFiles(file)
+      : file.endsWith(".html")
+        ? [file]
+        : [];
+  });
 
 const manifest = JSON.parse(
   readFileSync(requireFile("manifest.webmanifest"), "utf8"),
@@ -45,6 +54,20 @@ for (const relative of [
   if (!html.includes("data-theme-select"))
     fail(`${relative} has no theme selector`);
 }
+for (const file of htmlFiles(docs)) {
+  const html = readFileSync(file, "utf8");
+  for (const forbidden of [
+    "data-pwa-update",
+    "data-pwa-update-now",
+    "pwa-update",
+    "site-pwa-update",
+  ]) {
+    if (html.includes(forbidden))
+      fail(
+        `${path.relative(docs, file)} contains removed update UI: ${forbidden}`,
+      );
+  }
+}
 const worker = readFileSync(requireFile("service-worker.js"), "utf8");
 if (worker.includes("__PWA_"))
   fail("service worker still contains build tokens");
@@ -55,6 +78,8 @@ if (
   !worker.includes("url.origin !== self.location.origin")
 )
   fail("service worker request guards are missing");
+if (/SKIP_WAITING|skipWaiting\s*\(/.test(worker))
+  fail("service worker contains forced update activation");
 if (
   !worker.includes("MAX_RUNTIME_CACHE_ENTRIES = 96") ||
   !worker.includes("isPackageStylesheet") ||
