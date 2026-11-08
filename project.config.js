@@ -51,7 +51,7 @@ const software = {
   codeRepository: githubUrl,
   downloadUrl: npmUrl,
   license: `${githubUrl}/blob/main/LICENSE`,
-  programmingLanguage: ["CSS", "Sass"],
+  programmingLanguage: [ "CSS", "Sass" ],
 };
 
 module.exports = deepFreeze({

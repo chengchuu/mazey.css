@@ -4,7 +4,7 @@ module.exports = {
   ...packageConfig,
   mode: "development",
   entry: Object.fromEntries(
-    ["base", "blogbase", "confluence", "index", "link"].map((name) => [
+    [ "base", "blogbase", "confluence", "index", "link" ].map((name) => [
       name,
       `./src/z-temporary/${name}.js`,
     ]),

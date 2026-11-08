@@ -57,7 +57,7 @@ test("development server exposes every maintained source-backed library", () => 
 });
 
 test("only the Confluence entry contains library JavaScript", () => {
-  for (const name of ["base", "blogbase", "index", "link"]) {
+  for (const name of [ "base", "blogbase", "index", "link" ]) {
     const source = fs.readFileSync(
       path.join(projectRoot, `src/z-temporary/${name}.js`),
       "utf8",
@@ -83,7 +83,7 @@ test("base layout preserves viewport fallbacks before dynamic sizing", () => {
     "utf8",
   );
 
-  for (const css of [sourceCss, artifactCss]) {
+  for (const css of [ sourceCss, artifactCss ]) {
     assert.match(
       css,
       /\.base\s*\{[^}]*min-height:\s*calc\(100vh - 6rem\);\s*min-height:\s*calc\(100dvh - 6rem\);[^}]*\}/,
@@ -99,7 +99,7 @@ test("production single-entry filenames remain unchanged", () => {
   const configPath = require.resolve("../webpack.config");
   const previousEntry = process.env.ENTRY;
 
-  for (const name of ["base", "blogbase", "confluence", "index", "link"]) {
+  for (const name of [ "base", "blogbase", "confluence", "index", "link" ]) {
     process.env.ENTRY = name;
     delete require.cache[configPath];
     const config = require(configPath);
