@@ -123,9 +123,9 @@ self.addEventListener("fetch", (event) => {
   if (
     request.mode === "navigate" ||
     isPackageStylesheet ||
-    ["document", "script", "style"].includes(request.destination)
+    [ "document", "script", "style" ].includes(request.destination)
   )
     event.respondWith(networkFirst(request));
-  else if (["font", "image"].includes(request.destination))
+  else if ([ "font", "image" ].includes(request.destination))
     event.respondWith(cacheFirst(request));
 });
