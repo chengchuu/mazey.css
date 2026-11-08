@@ -22,7 +22,7 @@ function requirePath(file) {
 function allFiles(directory) {
   return readdirSync(directory).flatMap((name) => {
     const file = path.join(directory, name);
-    return statSync(file).isDirectory() ? allFiles(file) : [ file ];
+    return statSync(file).isDirectory() ? allFiles(file) : [file];
   });
 }
 
@@ -74,7 +74,7 @@ function renderServiceWorker(source, version) {
     __PWA_CACHE_PREFIX__: projectConfig.pwa.cachePrefix,
     __PWA_CACHE_VERSION__: version,
   };
-  return Object.entries(replacements).reduce((output, [ token, value ]) => {
+  return Object.entries(replacements).reduce((output, [token, value]) => {
     if (!output.includes(token))
       throw new Error(`Service worker token is missing: ${token}`);
     return output.replaceAll(token, value);

@@ -46,7 +46,7 @@ export function initializeTheme(storageKey: string): () => void {
         select.value = preference;
       });
     const meta = document.querySelector<HTMLMetaElement>(
-      "meta[name=\"theme-color\"][data-theme-color]",
+      'meta[name="theme-color"][data-theme-color]',
     );
     if (meta) {
       meta.content =

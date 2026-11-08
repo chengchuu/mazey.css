@@ -119,7 +119,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: [ MiniCssExtractPlugin.loader, "css-loader" ],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
@@ -131,25 +131,25 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: path.resolve(__dirname, "site/index.html"),
-      chunks: [ "shared", "home" ],
+      chunks: ["shared", "home"],
       inject: "body",
       templateParameters,
     }),
     new HtmlWebpackPlugin({
       filename: "playground/index.html",
       template: path.resolve(__dirname, "examples/index.html"),
-      chunks: [ "shared", "playground" ],
+      chunks: ["shared", "playground"],
       inject: "body",
       templateParameters,
     }),
     new HtmlWebpackPlugin({
       filename: "api/index.html",
       template: path.resolve(__dirname, "site/api.html"),
-      chunks: [ "shared", "api" ],
+      chunks: ["shared", "api"],
       inject: "body",
       templateParameters,
     }),
   ],
-  resolve: { extensions: [ ".tsx", ".ts", ".js" ] },
+  resolve: { extensions: [".tsx", ".ts", ".js"] },
   performance: { maxAssetSize: 600000, maxEntrypointSize: 600000 },
 };

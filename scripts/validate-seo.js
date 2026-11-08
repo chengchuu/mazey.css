@@ -4,9 +4,9 @@ const projectConfig = require("../project.config");
 
 const docs = path.resolve(__dirname, "../docs");
 const pages = [
-  [ "index.html", projectConfig.site.pages.home ],
-  [ "playground/index.html", projectConfig.site.pages.playground ],
-  [ "api/index.html", projectConfig.site.pages.api ],
+  ["index.html", projectConfig.site.pages.home],
+  ["playground/index.html", projectConfig.site.pages.playground],
+  ["api/index.html", projectConfig.site.pages.api],
 ];
 const fail = (message) => {
   throw new Error(`SEO validation failed: ${message}`);
@@ -26,7 +26,7 @@ function validateLocalReferences(html, relativePage) {
   }
 }
 
-for (const [ relative, page ] of pages) {
+for (const [relative, page] of pages) {
   const file = path.join(docs, relative);
   if (!existsSync(file)) fail(`missing ${relative}`);
   const html = readFileSync(file, "utf8");
@@ -36,9 +36,9 @@ for (const [ relative, page ] of pages) {
     `rel="canonical" href="${page.url}"`,
     `property="og:title" content="${page.title}"`,
     `property="og:url" content="${page.url}"`,
-    "type=\"application/ld+json\"",
-    "rel=\"icon\"",
-    "name=\"theme-color\"",
+    'type="application/ld+json"',
+    'rel="icon"',
+    'name="theme-color"',
   ];
   required.forEach((needle) => {
     if (!html.includes(needle)) fail(`${relative} is missing ${needle}`);
@@ -53,12 +53,12 @@ const robots = readFileSync(path.join(docs, "robots.txt"), "utf8");
 if (!robots.includes(`Sitemap: ${projectConfig.urls.sitemap}`))
   fail("robots.txt has the wrong sitemap URL");
 const sitemap = readFileSync(path.join(docs, "sitemap.xml"), "utf8");
-const locations = [ ...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g) ].map(
+const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
   (match) => match[1],
 );
 if (locations.length !== new Set(locations).size)
   fail("sitemap has duplicate locations");
-const expected = pages.map(([ , page ]) => page.url);
+const expected = pages.map(([, page]) => page.url);
 if (JSON.stringify(locations) !== JSON.stringify(expected))
   fail("sitemap routes do not match the stable public routes");
 

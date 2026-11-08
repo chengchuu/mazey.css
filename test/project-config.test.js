@@ -41,7 +41,7 @@ test("central configuration keeps all stable Pages routes under the project base
 });
 
 test("website dependencies stay development-only", () => {
-  for (const name of [ "bootstrap", "mazey", "react", "react-dom" ]) {
+  for (const name of ["bootstrap", "mazey", "react", "react-dom"]) {
     assert.equal(typeof pkg.devDependencies[name], "string");
   }
   assert.equal(pkg.dependencies, undefined);
@@ -52,7 +52,7 @@ test("stylesheet configuration preserves the package root and named bundles", ()
   assert.equal(projectConfig.stylesheets[0].importPath, "mazey.css");
   assert.deepEqual(
     projectConfig.stylesheets.map((entry) => entry.name),
-    [ "index", "base", "blogbase", "link", "confluence" ],
+    ["index", "base", "blogbase", "link", "confluence"],
   );
 });
 
@@ -104,11 +104,11 @@ test("the npm allowlist excludes generated website and package-build shims", () 
     "LICENSE",
   ]);
   assert.equal(pkg.files.includes("src/**/*.scss"), false);
-  for (const family of [ "extend", "function", "mixin", "variate" ]) {
+  for (const family of ["extend", "function", "mixin", "variate"]) {
     assert.equal(existsSync(path.join(root, "src", family)), false);
     assert.equal(existsSync(path.join(root, "sass", family)), true);
   }
-  for (const lifecycle of [ "prepack", "postpack" ]) {
+  for (const lifecycle of ["prepack", "postpack"]) {
     assert.equal(pkg.scripts[lifecycle], undefined);
   }
 });
@@ -144,7 +144,7 @@ test("the packed package resolves and compiles public entries in isolation", () 
       { cwd: root, encoding: "utf8", env: npmEnvironment },
     );
     assert.equal(packResult.status, 0, packResult.stderr);
-    const [ packManifest ] = JSON.parse(packResult.stdout);
+    const [packManifest] = JSON.parse(packResult.stdout);
     const packedPaths = packManifest.files.map((file) => file.path);
     assert.deepEqual(
       packedPaths.filter((file) => file.endsWith(".scss")).sort(),
@@ -226,16 +226,16 @@ test("the packed package resolves and compiles public entries in isolation", () 
       assert.doesNotThrow(
         () =>
           sass.compileString(`@use "pkg:mazey.css/${entry}";`, {
-            importers: [ new sass.NodePackageImporter(consumerDirectory) ],
+            importers: [new sass.NodePackageImporter(consumerDirectory)],
           }),
         `${entry} must compile from the packed package`,
       );
     }
 
     const result = sass.compileString(
-      "@use \"pkg:mazey.css/extend/base\";\n.example { @extend %m-flex-center; }\n",
+      '@use "pkg:mazey.css/extend/base";\n.example { @extend %m-flex-center; }\n',
       {
-        importers: [ new sass.NodePackageImporter(consumerDirectory) ],
+        importers: [new sass.NodePackageImporter(consumerDirectory)],
       },
     );
     assert.match(result.css, /display: flex/);
@@ -249,9 +249,9 @@ test("pnpm is the only committed dependency lock format", () => {
   const root = path.resolve(__dirname, "..");
   const result = spawnSync(
     "git",
-    [ "ls-files", "--", "package-lock.json", "pnpm-lock.yaml" ],
+    ["ls-files", "--", "package-lock.json", "pnpm-lock.yaml"],
     { cwd: root, encoding: "utf8" },
   );
   assert.equal(result.status, 0, result.stderr);
-  assert.deepEqual(result.stdout.trim().split("\n"), [ "pnpm-lock.yaml" ]);
+  assert.deepEqual(result.stdout.trim().split("\n"), ["pnpm-lock.yaml"]);
 });
