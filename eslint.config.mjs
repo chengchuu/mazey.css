@@ -20,18 +20,6 @@ export default tseslint.config(
       globals: { ...globals.browser, ...globals.node },
     },
     rules: {
-      semi: [ "warn", "always" ],
-      quotes: [ "warn", "double" ],
-      indent: [ "warn", 2, { SwitchCase: 1 } ],
-      "comma-dangle": [ "warn", "always-multiline" ],
-      "eol-last": [ "warn", "always" ],
-      "spaced-comment": [ "warn", "always" ],
-      "object-curly-spacing": [ "warn", "always" ],
-      "array-bracket-spacing": [ "warn", "always" ],
-      "object-curly-newline": [
-        "warn",
-        { ImportDeclaration: { multiline: true, minProperties: 4 } },
-      ],
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_" },

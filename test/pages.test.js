@@ -22,7 +22,7 @@ test("manifest identity and scope remain project-specific", () => {
   assert.equal(manifest.scope, "/mazey.css/");
   assert.deepEqual(
     manifest.icons.map((icon) => icon.sizes),
-    [ "192x192", "512x512", "512x512" ],
+    ["192x192", "512x512", "512x512"],
   );
 });
 

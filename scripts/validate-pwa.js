@@ -14,7 +14,7 @@ const requireFile = (relative) => {
 const pngSize = (file) => {
   const buffer = readFileSync(file);
   if (buffer.toString("ascii", 1, 4) !== "PNG") fail(`${file} is not a PNG`);
-  return [ buffer.readUInt32BE(16), buffer.readUInt32BE(20) ];
+  return [buffer.readUInt32BE(16), buffer.readUInt32BE(20)];
 };
 const htmlFiles = (directory) =>
   readdirSync(directory).flatMap((name) => {
@@ -22,7 +22,7 @@ const htmlFiles = (directory) =>
     return statSync(file).isDirectory()
       ? htmlFiles(file)
       : file.endsWith(".html")
-        ? [ file ]
+        ? [file]
         : [];
   });
 
@@ -36,7 +36,7 @@ if (
   fail("manifest start_url and scope must match the Pages base path");
 for (const icon of projectConfig.pwa.icons) {
   const relative = `images/${icon.file}`;
-  const [ width, height ] = pngSize(requireFile(relative));
+  const [width, height] = pngSize(requireFile(relative));
   const expected = Number(icon.sizes.split("x")[0]);
   if (width !== expected || height !== expected)
     fail(
@@ -74,7 +74,7 @@ if (worker.includes("__PWA_"))
 if (!worker.includes(`const PROJECT_BASE = "${projectConfig.site.basePath}"`))
   fail("service worker has the wrong scope base");
 if (
-  !worker.includes("request.method !== \"GET\"") ||
+  !worker.includes('request.method !== "GET"') ||
   !worker.includes("url.origin !== self.location.origin")
 )
   fail("service worker request guards are missing");
