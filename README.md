@@ -1,20 +1,18 @@
-<!-- omit from toc -->
-
 # mazey.css
 
 [![npm version][npm-image]][npm-url]
 [![license][license-image]][license-url]
+
+[npm-image]: https://img.shields.io/npm/v/mazey.css
+[npm-url]: https://www.npmjs.com/package/mazey.css
+[license-image]: https://img.shields.io/npm/l/mazey.css
+[license-url]: https://github.com/chengchuu/mazey.css/blob/main/LICENSE
 
 Reusable CSS and Sass styles for normalized pages, responsive layouts, links, and Confluence content.
 
 - [Website](https://chengchuu.github.io/mazey.css/)
 - [Playground](https://chengchuu.github.io/mazey.css/playground/)
 - [Stylesheet API reference](https://chengchuu.github.io/mazey.css/api/)
-
-[npm-image]: https://img.shields.io/npm/v/mazey.css
-[npm-url]: https://www.npmjs.com/package/mazey.css
-[license-image]: https://img.shields.io/npm/l/mazey.css
-[license-url]: https://github.com/chengchuu/mazey.css/blob/main/LICENSE
 
 ## Install
 
