@@ -1,6 +1,6 @@
 {
   "name": "mazey.css",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "Reusable CSS and Sass styles for normalized pages, layouts, links, and Confluence content.",
   "main": "lib/index.css",
   "exports": {
@@ -36,13 +36,13 @@
   "scripts": {
     "dev": "webpack serve --mode development --config webpack.config.dev.js",
     "dev:site": "webpack serve --mode development --config webpack.site.config.js",
+    "watch:link": "cross-env ENTRY=link webpack --config webpack.config.js --watch",
+    "build": "npm run build:index && npm run build:base && npm run build:link && npm run build:confluence && npm run build:blogbase && npm run package:validate",
     "build:index": "cross-env ENTRY=index webpack --config webpack.config.js",
     "build:confluence": "cross-env ENTRY=confluence webpack --config webpack.config.js",
     "build:link": "cross-env ENTRY=link webpack --config webpack.config.js",
-    "watch:link": "cross-env ENTRY=link webpack --config webpack.config.js --watch",
     "build:base": "cross-env ENTRY=base webpack --config webpack.config.js",
     "build:blogbase": "cross-env ENTRY=blogbase webpack --config webpack.config.js",
-    "build": "npm run build:index && npm run build:base && npm run build:link && npm run build:confluence && npm run build:blogbase && npm run package:validate",
     "build:site": "cross-env GITHUB_PAGES=true webpack --mode production --config webpack.site.config.js",
     "build:dev": "webpack --mode development --config webpack.site.config.js",
     "typecheck": "tsc --noEmit",
@@ -88,7 +88,7 @@
     "eslint": "^10.0.0",
     "globals": "^17.0.0",
     "html-webpack-plugin": "^5.6.7",
-    "mazey": "^5.9.1",
+    "mazey": "^5.10.1",
     "mini-css-extract-plugin": "^2.10.2",
     "prettier": "^3.9.0",
     "react": "^19.2.8",

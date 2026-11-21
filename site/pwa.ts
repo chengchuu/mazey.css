@@ -1,9 +1,4 @@
-import {
-  isSafePWAEnv,
-  isStandalonePWA,
-  watchServiceWorkerUpdates,
-} from "mazey";
-import type { ServiceWorkerUpdateWatcher } from "mazey";
+import { isSafePWAEnv, isStandalonePWA } from "mazey";
 import type { SiteRuntimeConfig } from "./runtime-config";
 
 interface BeforeInstallPromptEvent extends Event {
@@ -58,36 +53,8 @@ export function initializePwa(config: SiteRuntimeConfig["pwa"]): void {
   if (!config.enabled || !isSafePWAEnv({ scope: config.scope })) return;
   const register = async () => {
     try {
-      const registration = await navigator.serviceWorker.register(
-        config.serviceWorkerUrl,
-        { scope: config.scope },
-      );
-      const notice = document.querySelector<HTMLElement>("[data-pwa-update]");
-      const updateButton = document.querySelector<HTMLButtonElement>(
-        "[data-pwa-update-now]",
-      );
-      let reloadRequested = false;
-      const watcher: ServiceWorkerUpdateWatcher = watchServiceWorkerUpdates(
-        registration,
-        navigator.serviceWorker,
-        {
-          onUpdateAvailable: () => {
-            if (notice) notice.hidden = false;
-            announce(
-              `A new version of the ${config.appName} website is available.`,
-            );
-          },
-          onControllerChange: () => {
-            if (reloadRequested) window.location.reload();
-          },
-        },
-      );
-      updateButton?.addEventListener("click", () => {
-        reloadRequested = watcher.activateWaiting();
-        if (reloadRequested) {
-          updateButton.disabled = true;
-          announce("Updating the website now.");
-        }
+      await navigator.serviceWorker.register(config.serviceWorkerUrl, {
+        scope: config.scope,
       });
     } catch (error) {
       console.error("Failed to register the mazey.css service worker.", error);
