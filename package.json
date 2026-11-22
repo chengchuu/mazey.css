@@ -1,6 +1,6 @@
 {
   "name": "mazey.css",
-  "version": "1.7.5",
+  "version": "1.7.6",
   "description": "Reusable CSS and Sass styles for normalized pages, layouts, links, and Confluence content.",
   "main": "lib/index.css",
   "exports": {
@@ -47,6 +47,7 @@
     "build:dev": "webpack --mode development --config webpack.site.config.js",
     "typecheck": "tsc --noEmit",
     "lint": "eslint project.config.js webpack.site.config.js webpack.config.dev.js scripts site examples test",
+    "lint:fix": "npm run lint -- --fix",
     "test": "node --test test/*.test.js",
     "docs": "npm run build:site && node scripts/build-pages.js && npm run seo:validate && npm run pwa:validate",
     "seo:validate": "node scripts/validate-seo.js",
